@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/04 12:02:05 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/04 12:21:33 by ekwon            ###   ########.fr       */
+/*   Created: 2021/05/04 13:42:27 by ekwon             #+#    #+#             */
+/*   Updated: 2021/05/04 13:59:48 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strrchr(const char *s, int c)
+char	*strnstr(const char *haystack, const char *needle, size_t len)
 {
-	int		i;
-	int		check;
+	size_t	i;
+	size_t	n_len;
 	char	*tmp;
+	char	*ptr;
 
 	i = 0;
-	check = 0;
-	while (i < ft_strlen(s) + 1)
+	n_len = 0;
+	ptr = needle;
+	while (i < len)
 	{
-		if (*s == c)
+		if (ft_strchr(haystack, *needle))
 		{
-			tmp = s;
-			check = 1;
+			tmp = haystack;
+			while (ft_strchr(haystack, *needle))
+			{
+				needle++;
+				n_len++;
+			}
+			if (ft_strlen(needle) == n_len)
+				return (tmp);
 		}
 		i++;
-		s++;
+		haystack++;
 	}
-	if (check == 1)
-		return (tmp);
-	else
-		return (NULL);
+	return (NULL);
 }
