@@ -6,13 +6,13 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 17:39:33 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/05 18:32:20 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/05 20:18:14 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
 	size_t i;
 

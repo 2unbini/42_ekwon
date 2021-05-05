@@ -6,13 +6,13 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 11:53:04 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/05 18:52:44 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/05 20:18:07 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
 
