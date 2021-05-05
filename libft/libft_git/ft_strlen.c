@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 11:18:26 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/05 20:18:01 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/05 20:38:35 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ size_t	ft_strlen(const char *s)
 	size_t len;
 
 	len = 0;
-	while (s)
+	while (*((char *)s + len))
 	{
 		len++;
-		s++;
 	}
 	return (len);
 }
