@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 11:20:11 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/04 11:27:05 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/05 18:56:49 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	if (dstsize > 0)
 	{
 		while (src && (i < dstsize - 1))
 		{
-			dst[i] = src;
+			dst[i] = *((char *)src);
 			i++;
 			src++;
 		}

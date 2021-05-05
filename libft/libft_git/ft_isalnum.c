@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:54:00 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/04 10:57:06 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/05 12:51:13 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	isalnum(int c)
 {
-	(unsigned char)c;
 	if (ft_isalpha(c) || ft_isdigit(c))
 		return (1);
 	return (0);

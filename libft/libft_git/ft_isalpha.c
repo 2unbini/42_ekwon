@@ -6,13 +6,12 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:46:30 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/04 10:51:32 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/05 12:51:09 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isalpha(int c)
 {
-	(unsigned char)c;
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (1);
 	return (0);

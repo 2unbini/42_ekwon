@@ -6,13 +6,12 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 11:05:01 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/04 11:06:05 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/05 18:30:45 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isprint(int c)
 {
-	(unsigned char)c;
 	if (c >= ' ' && c <= '~')
 		return (1);
 	return (0);

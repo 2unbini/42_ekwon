@@ -6,13 +6,12 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:49:42 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/04 11:35:54 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/05 12:51:04 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int c)
 {
-	(unsigned char)c;
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);

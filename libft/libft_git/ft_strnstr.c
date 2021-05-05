@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:42:27 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/04 13:59:48 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/05 18:57:16 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ char	*strnstr(const char *haystack, const char *needle, size_t len)
 
 	i = 0;
 	n_len = 0;
-	ptr = needle;
+	ptr = (char *)needle;
 	while (i < len)
 	{
 		if (ft_strchr(haystack, *needle))
 		{
-			tmp = haystack;
+			tmp = (char *)haystack;
 			while (ft_strchr(haystack, *needle))
 			{
 				needle++;

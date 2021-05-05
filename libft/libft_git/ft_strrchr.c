@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:02:05 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/04 12:21:33 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/05 18:57:54 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*strrchr(const char *s, int c)
 {
-	int		i;
+	size_t	i;
 	int		check;
 	char	*tmp;
 
@@ -24,7 +24,7 @@ char	*strrchr(const char *s, int c)
 	{
 		if (*s == c)
 		{
-			tmp = s;
+			tmp = (char *)s;
 			check = 1;
 		}
 		i++;
