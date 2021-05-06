@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 17:42:15 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/05 20:32:30 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/06 16:41:09 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	uc_s1 = (unsigned char *)s1;
 	uc_s2 = (unsigned char *)s2;
-	while (i < n && uc_s1[i] && uc_s2[i])
+	while (i < n)
 	{
 		if (uc_s1[i] != uc_s2[i])
 			return (uc_s1[i] - uc_s2[i]);
