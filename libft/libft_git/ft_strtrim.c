@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:23:08 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/09 15:17:10 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/09 23:23:55 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!s1)
 		return (NULL);
 	if (!set)
-		return (ft_strdup(s1));
+		return ((char *)s1);
 	while (front < rear && ft_strchr(set, *(s1 + front)))
 		front++;
 	while (rear > 0 && ft_strchr(set, *(s1 + rear - 1)))

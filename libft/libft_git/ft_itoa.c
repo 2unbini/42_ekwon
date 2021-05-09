@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:17:44 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/09 16:03:56 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/09 22:29:57 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static char	*min_output(void)
 	result = (char *)malloc(sizeof(char) * 12);
 	result[0] = '-';
 	result[10] = '8';
-	result[11] = 0;
+	result[11] = '\0';
 	while (num)
 	{
-		result[i] = num % 10;
+		result[i] = num % 10 + '0';
 		num /= 10;
 		i++;
 	}
@@ -49,7 +49,7 @@ static char	*make_string(char tmp[], int sign, int i)
 	char	*result;
 
 	idx = -1;
-	if(!(result = (char *)malloc(sizeof(char) * i)))
+	if (!(result = (char *)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	if (sign == -1)
 		result[++idx] = '-';
@@ -63,15 +63,18 @@ char		*ft_itoa(int n)
 {
 	int		i;
 	int		sign;
-	char	temp[11];
+	char	temp[10];
 
-	if(!(sign = get_sign(n)))
+	sign = get_sign(n);
+	if (sign == 0)
 		return (min_output());
 	i = 0;
 	n *= sign;
+	if (n == 0)
+		temp[i++] = '0';
 	while (n)
 	{
-		temp[i] = n % 10;
+		temp[i] = n % 10 + '0';
 		n /= 10;
 		i++;
 	}

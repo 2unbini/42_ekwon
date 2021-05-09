@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:01:49 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/09 22:05:12 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/09 23:18:10 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*result;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	if (len > ft_strlen(s))
 		len = ft_strlen(s);
 	if (!(result = (char*)malloc(sizeof(char) * (len + 1))))
