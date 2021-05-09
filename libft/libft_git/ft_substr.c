@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:01:49 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/09 14:27:28 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/09 22:05:12 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	size_t	i;
 	char	*result;
 
+	i = 0;
+	if (len > ft_strlen(s))
+		len = ft_strlen(s);
 	if (!(result = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
-	while (start < len && s[start])
+	while (i < len && start < ft_strlen(s) && s[start])
 	{
-		*result = ((char *)s)[start];
+		result[i] = ((char *)s)[start];
 		start++;
-		result++;
+		i++;
 	}
-	*result = 0;
+	result[i] = 0;
 	return (result);
 }

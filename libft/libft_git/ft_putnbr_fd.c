@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 16:26:45 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/09 16:34:26 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/09 17:34:10 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_putnbr_fd(int n, int fd)
 	char	*result;
 
 	i = 0;
-	result = itoa(n);
+	result = ft_itoa(n);
 	if (!result)
 		return ;
 	while (result[i])
