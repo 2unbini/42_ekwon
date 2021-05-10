@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 16:48:54 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/10 17:59:35 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/10 21:39:10 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*cp_lst;
 	t_list	*start;
-	t_list	*tmp;
 
-	if (!lst || !f || !del)
+	if (!lst || !f)
 		return (NULL);
 	if (!(cp_lst = ft_lstnew(f(lst->content))))
 		return (NULL);
@@ -32,7 +31,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 			ft_lstclear(&start, del);
 			return (NULL);
 		}
+		cp_lst = cp_lst->next;
 	}
 	cp_lst->next = NULL;
-	return (cp_lst);
+	return (start);
 }
