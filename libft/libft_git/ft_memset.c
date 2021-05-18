@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 15:45:53 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/05 20:18:08 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/11 11:10:32 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		*((unsigned char*)b + i) = (unsigned char)c;
+		((unsigned char*)b)[i] = (unsigned char)c;
 		i++;
 	}
 	return (b);

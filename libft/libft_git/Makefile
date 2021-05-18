@@ -73,7 +73,7 @@ bonus : $(OBJS) $(OBJS_BONUS)
 	$(CC) $(CFLAG) -c $< -o $@
 
 clean :
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean : clean
 	$(RM) $(NAME)
@@ -83,4 +83,4 @@ re : fclean all
 $(NAME) : $(OBJS)
 	$(AR) $(ARFLAG) $@ $^
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re bonus

@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:06:11 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/05 18:30:00 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/11 11:10:50 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_bzero(void *s, size_t n)
 		return ;
 	while (i < n)
 	{
-		*((unsigned char *)s + i) = 0;
+		((unsigned char *)s)[i] = 0;
 		i++;
 	}
 }
