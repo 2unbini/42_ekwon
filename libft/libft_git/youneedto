@@ -1,0 +1,3 @@
+need to edit atoi (int -> long long)
+need to edit Makefile (if ~ : prevent double make)
+need to put 0 init in split (when free things)
