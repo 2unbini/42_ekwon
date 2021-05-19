@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:31:57 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/06 18:28:54 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/12 11:13:13 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static int	check_first(char c, int *i)
 
 int			ft_atoi(const char *str)
 {
-	int i;
-	int sign;
-	int result;
+	int			i;
+	int			sign;
+	long long	result;
 
 	i = 0;
 	result = 0;
