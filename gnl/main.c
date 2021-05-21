@@ -17,10 +17,10 @@ int main(void)
     fd = open("test.txt", O_RDONLY);
     while ((ret = get_next_line(fd, &line)) > 0)
     {
-        printf("%s\n", line);
+        printf("%s\n%d\n", line, ret);
         free(line);
     }
-    printf("%s\n", line);
+    printf("%s\n%d\n", line, ret);
 	free(line);
     return (0);
 }
