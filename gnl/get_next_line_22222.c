@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 16:43:39 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/19 21:10:06 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/20 11:44:18 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,3 +79,18 @@ int			get_next_line(int fd, char **line)
 	}
 	return (1);
 }
+
+/*
+
+static char *tmp[OPEN_MAX];
+
+tmp[fd] 할당한 뒤, buffer 를 저장하고,
+만약에 중간에 개행이 나온다면, 개행 전까지 line 에 복사해주고,
+나머지를 남겨야 되는데, 개행의 인덱스가 i 라면,
+tmp[fd][i+1] 부터의 값이 static tmp에 다시 저장돼야 함.
+그 부분을 처리해주려면, 우선 tmp[fd]를 가리키는 포인터 ptr을 지정해준 뒤,
+tmp[fd] = strdup(&tmp[fd][i+1]); 해서 할당해준 뒤,
+기존 tmp였던 부분, 즉 ptr 이 가리키고 있는 애를 free(ptr) 해주면 됨.
+
+*/
+

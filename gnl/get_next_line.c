@@ -6,14 +6,14 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 14:44:18 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/19 21:49:37 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/20 15:49:44 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #define MAX_FILE 256
-#define EOF -1
+//#define EOF -1
 
 static void	*ft_calloc(size_t count, size_t size)
 {
@@ -31,7 +31,7 @@ static void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-size_t	ft_strlen(const char *s)
+size_t		ft_strlen(const char *s)
 {
 	size_t	len;
 
@@ -41,106 +41,109 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-char	*ft_strdup(const char *s1)
+char		*ft_strjoin(char const *s1, char const *s2)
 {
-	int		i;
-	char	*s2;
-	char	*ptr;
+	size_t	i;
+	char	*result;
 
 	i = 0;
-	s2 = (char *)s1;
-	if (!(ptr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
-		return (NULL);
-	while (s2[i])
+	if (!s1 || !s2)
+		return (0);
+	if (!(result = (char *)malloc(sizeof(char) *
+					(ft_strlen(s1) + ft_strlen(s2)))))
+		return (0);
+	while (i < ft_strlen(s1))
 	{
-		ptr[i] = s2[i];
+		result[i] = s1[i];
 		i++;
 	}
-	ptr[i] = 0;
-	return (ptr);
+	while (i < ft_strlen(s1) + ft_strlen(s2))
+	{
+		result[i] = s2[i - ft_strlen(s2)];
+		i++;
+	}
+	result[i] = 0;
+	return (result);
+}
+
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t i;
+
+	i = 0;
+	if (!dst || !src || dstsize < 0)
+		return (0);
+	if (dstsize > 0)
+	{
+		while (((char *)src)[i] && i + 1 < dstsize)
+		{
+			dst[i] = ((char *)src)[i];
+			i++;
+		}
+		dst[i] = 0;
+	}
+	return (ft_strlen(src));
 }
 
 #include <stdio.h>
 
 int			get_next_line(int fd, char **line)
 {
-	static char	*tmp[MAX_FILE];
+	static char	tmp[MAX_FILE][BUFFER_SIZE + 1];
 	char		buf[BUFFER_SIZE + 1];
-	int			idx;
 	int			i;
 	int			j;
-	int			len;
-	int			buf_size;
 
 	i = 0;
-	j = 0;
-	idx = 0;
-	len = 0;
-	buf_size = 0;
-	// buf 배열 0으로 초기화
 	while (i <= BUFFER_SIZE)
 		buf[i++] = 0;
-
-	// buf 에 BUFFER_SIZE 만큼 read
+	j = 0;
+	while (tmp[fd][j] > 0)
+		j++;
 	if (read(fd, buf, BUFFER_SIZE) == -1)
 		return (-1);
-
-	// tmp[fd]가 존재하면(BUFFER_SIZE 중간에 개행이 있어서 뒷부분 저장된 상태) -> 그 길이 구하기
-	if (tmp[fd])
-	{
-		while (tmp[fd][len])
-			len++;
-	}
-
-	// line 할당하기 -> BUFFER_SIZE + len + 1
-	if (!(*line = (char *)ft_calloc(sizeof(char), (BUFFER_SIZE + len + 1))))
-		return (-1);
-
-	// tmp[fd]가 존재하면, tmp[fd][i]가 문장의 끝이 아닐 때까지 line 에 tmp 저장.
+		/*
 	i = 0;
-	if (tmp[fd])
+	while (i < BUFFER_SIZE && buf[i] != EOF)
 	{
-		while (tmp[fd][i] != '\0')
-		{
-			(*line)[idx] = tmp[fd][i];
-			idx++;
-			i++;
-		}
-	}
-
-	// buf[i]가 개행 혹은 파일의 끝이 아닐 때까지 line 에 buf 저장 + line 의 맨 끝에 널문자
-	i = 0;
-	while (buf[i] != '\n' && buf[i] != EOF)
-	{
-		(*line)[idx] = buf[i];
-		idx++;
+		tmp[fd][j] = buf[i];
 		i++;
+		j++;
 		if (buf[i] == EOF)
+			tmp[fd][j++] = EOF;
+	}
+	tmp[fd][j] = '\0';
+	*/
+	if (!(*line = (char *)ft_calloc(sizeof(char), BUFFER_SIZE + j + 1)))
+		return (-1);
+	i = 0;
+	while (tmp[fd][i] != '\0' && tmp[fd][i] != '\n' && tmp[fd][i] != EOF)
+	{
+		(*line)[i] = tmp[fd][i];
+		i++;
+		if (tmp[fd][i] == EOF)
 		{
-			free(tmp[fd]);
+			(*line)[i] = '\0';
 			return (0);
 		}
 	}
-	(*line)[idx] = 0;
-
-	// buf의 인덱스가 BUFFER_SIZE 보다 작고, buf[i] 가 파일의 끝이 아닐 때, tmp 에 나머지 저장.
-	if (i < BUFFER_SIZE && buf[i] != EOF)
+	i = 0;
+	while (i < BUFFER_SIZE && buf[i] != '\n' && buf[i] != EOF)
 	{
-		buf_size = BUFFER_SIZE - (i + 1);
-		if (!(tmp[fd] = (char *)ft_calloc(sizeof(char), (buf_size + 1))))
-			return (-1);
-		while (j < buf_size && buf[i] != EOF)
-		{
-			tmp[fd][j] = buf[i];
-			i++;
-			j++;
-		}
-		tmp[fd][j] = 0;
+		(*line)[i] = buf[i];
+		i++;
 	}
-	if (buf[i] == EOF)
+	if (buf[i] == '\n')
+		i++;
+	j = 0;
+	while (buf[i] != '\0' && buf[i] != EOF)
 	{
-		free(tmp[fd]);
-		return (0);
+		tmp[fd][j] = buf[i];
+		j++;
+		i++;
+		if (buf[i] == EOF)
+			tmp[fd][i++] = EOF;
 	}
+	tmp[fd][i] = '\0';
 	return (1);
 }

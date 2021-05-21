@@ -21,7 +21,7 @@ int main(void)
         free(line);
     }
     printf("%s\n", line);
-    free(line);
+	free(line);
     return (0);
 }
 
