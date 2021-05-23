@@ -1,8 +1,0 @@
-stdin, redirection... 상관 하지 말고 fd에 따라서 read할 수 있도록 하자!
-
-while (gnl(fd, &line) == 1)
-{
-	write(fd, line, strlen(line));
-	free(line);
-}
-ㅇㅣ런 방식으로 갈거임

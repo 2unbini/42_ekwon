@@ -6,73 +6,79 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:01 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/21 20:45:07 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/23 17:02:22 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-int		save_free_tmp(char **tmp_fd, int i)
+int	get_nl_idx(char **tmp_fd)
 {
-	char	*tmp_ptr;
+	int idx;
 
-	tmp_ptr = *tmp_fd;
-	*tmp_fd = ft_strdup((tmp_ptr + i));
-	free(tmp_ptr);
+	idx = 0;
+	while ((*tmp_fd)[idx] != '\0')
+	{
+		if ((*tmp_fd)[idx] == '\n')
+			return (idx);
+		idx++;
+	}
+	return (-1);
+}
+
+int	set_newline(char **tmp_fd, char **line, int nl_idx)
+{
+	char *ptr;
+
+	(*tmp_fd)[nl_idx] = '\0';
+	ptr = *line;
+	if (!(*line = ft_strdup(*tmp_fd)))
+		return (-1);
+	free(ptr);
+	ptr = *tmp_fd;
+	if (!((*tmp_fd) = ft_strdup((*tmp_fd) + nl_idx + 1)))
+		return (-1);
+	free(ptr);
 	return (1);
 }
 
-int		tmp_len(char **tmp_fd)
+int	set_eof(char **tmp_fd, char **line)
 {
-	int len;
+	char *ptr;
 
-	len = 0;
-	while ((*tmp_fd)[len] != '\n' && (*tmp_fd)[len] != '\0')
-		len++;
-	return (len);
-}
-
-int		save_line(char **tmp_fd, char **line)
-{
-	int	i;
-
-	i = 0;
-	while ((*tmp_fd)[i] != '\n' && (*tmp_fd)[i] != '\0')
-	{
-		(*line)[i] = (*tmp_fd)[i];
-		i++;
-	}
-	(*line)[i] = '\0';
-	if ((*tmp_fd)[i] == '\n')
-		return (i);
-	//free(*tmp_fd);
+	ptr = *line;
+	if (!(*line = ft_strdup(*tmp_fd)))
+		return (-1);
+	free(ptr);
+	*tmp_fd = 0;
+	free(*tmp_fd);
 	return (0);
 }
 
-int		get_next_line_bonus(int fd, char **line)
+int	get_next_line_bonus(int fd, char **line)
 {
-	static char	*tmp[OPEN_MAX];
-	char		buf[BUFFER_SIZE + 1];
-	int			status;
-	int			read_size;
-	int			i;
+	static char *tmp[OPEN_MAX];
+	char	    buf[BUFFER_SIZE + 1];
+	int	    nl_idx;
+	int	    read_size;
 
-	i = 0;
-	status = 0;
-	buf[BUFFER_SIZE] = '\0';
 	if (!tmp[fd])
 		tmp[fd] = ft_strdup("");
+	*line = ft_strdup("");
 	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
+		buf[read_size] = '\0';
 		tmp[fd] = ft_strjoin(tmp[fd], buf);
-		if (!(*line = (char *)malloc(sizeof(char) * (tmp_len(&tmp[fd]) + 1))))
-			return (-1);
-		status = save_line(&tmp[fd], line);
-		if (status > 0)
-			return (save_free_tmp(&tmp[fd], status + 1));
+		if ((nl_idx = get_nl_idx(&tmp[fd])) != -1)
+			return (set_newline(&tmp[fd], line, nl_idx));
 	}
-	status = save_line(&tmp[fd], line);
-	if (status > 0)
-		return (save_free_tmp(&tmp[fd], status + 1));
+	if (read_size < 0)
+	{
+		free(tmp[fd]);
+		return (-1);
+	}
+	if ((nl_idx = get_nl_idx(&tmp[fd])) != -1)
+		return (set_newline(&tmp[fd], line, nl_idx));
+	set_eof(&tmp[fd], line);
 	return (0);
 }
