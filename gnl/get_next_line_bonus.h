@@ -6,24 +6,25 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:27 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/23 16:58:46 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/23 23:00:39 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef GET_NEXT_LINE_BONUS_H
+#ifndef GET_NEXT_LINE_BONUS_H
 #define GET_NEXT_LINE_BONUS_H
 
-# include <unistd.h>
-# include <stdlib.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <limits.h>
 
-# define OPEN_MAX (500)
+//#define OPEN_MAX (2000)
 
-size_t	ft_strlen(char const *s);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *s);
-int	set_newline(char **tmp_fd, char **line, int nl_idx);
-int	set_eof(char **tmp_fd, char **line);
-int	get_nl_idx(char **tmp_fd);
-int	get_next_line_bonus(int fd, char **line);
+size_t ft_strlen(char const *s);
+char *ft_strjoin(char const *s1, char const *s2);
+char *ft_strdup(const char *s);
+int set_newline(char **tmp_fd, char **line, int nl_idx);
+int set_eof(char **tmp_fd, char **line);
+int get_nl_idx(char **tmp_fd);
+int get_next_line(int fd, char **line);
 
-# endif
+#endif
