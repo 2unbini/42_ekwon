@@ -3,98 +3,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdbool.h>
+#include <string.h>
 
 int get_next_line(int fd, char **line);
 
-int main()
-{
-	int fd;
-	int i;
-	int j;
-	char *line = 0;
-
-	j = 1;
-	printf("\n==========================================\n");
-	printf("========== TEST 1 : The Alphabet =========\n");
-	printf("==========================================\n\n");
-
-	if (!(fd = open("/Users/eunbin/cardet/gnl/42testers-gnl/files/huge_alphabet", O_RDONLY)))
-	{
-		printf("\nError in open\n");
-		return (0);
-	}
-	while ((i = get_next_line(fd, &line)) > 0)
-	{
-		printf("|%s\n", line);
-		free(line);
-		j++;
-	}
-	printf("|%s\n", line);
-	free(line);
-	close(fd);
-
-	if (i == -1)
-		printf("\nError in Fonction - Returned -1\n");
-	else if (j == 1056)
-		printf("\nRight number of lines\n");
-	else if (j != 1056)
-		printf("\nNot Good - Wrong Number Of Lines\n");
-	j = 1;
-	printf("\n==========================================\n");
-	printf("========= TEST 8 : SUPER FAT FILE ========\n");
-	printf("==========================================\n\n");
-
-	if (!(fd = open("/Users/eunbin/cardet/gnl/42testers-gnl/files/huge_file", O_RDONLY)))
-	{
-		printf("\nError in open\n");
-		return (0);
-	}
-	while ((i = get_next_line(fd, &line)) > 0)
-	{
-		printf("|%s\n", line);
-		free(line);
-		j++;
-	}
-	printf("|%s\n", line);
-	free(line);
-	close(fd);
-
-	if (i == -1)
-		printf("\nError in Fonction - Returned -1\n");
-	else if (j == 2916)
-		printf("\nRight number of lines\n");
-	else if (j != 2916)
-		printf("\nNot Good - Wrong Number Of Lines\n");
-	j = 1;
-	printf("\n==========================================\n");
-	printf("======== TEST 8 : SUPER LONG LINE ========\n");
-	printf("==========================================\n\n");
-
-	if (!(fd = open("/Users/eunbin/cardet/gnl/42testers-gnl/files/huge_line", O_RDONLY)))
-	{
-		printf("\nError in open\n");
-		return (0);
-	}
-	while ((i = get_next_line(fd, &line)) > 0)
-	{
-		printf("%s\n", line);
-		free(line);
-		j++;
-	}
-	printf("%s\n", line);
-	free(line);
-	close(fd);
-
-	if (i == -1)
-		printf("\nError in Fonction - Returned -1\n\n");
-	else if (j == 1)
-		printf("\nRight number of lines\n\n");
-	else if (j != 1)
-		printf("\nNot Good - Wrong Number Of Lines\n\n");
-	return (0);
-}
-
 /*
+void check(bool succes)
+{
+	if (succes)
+		printf("success\n");
+	else
+		printf("fail\n");
+}
+int main(void)
+{
+	int r = -1;
+	char *s = NULL;
+	char *line = NULL;
+	int gnlReturn = get_next_line(1000, &line);
+	printf("%d\n", gnlReturn);
+	printf("%d\n", (s == NULL ? line == NULL : !strcmp(line, s)));
+	printf("%d\n", (r == gnlReturn && (s == NULL ? line == NULL : !strcmp(line, s))));
+	check(r == gnlReturn && (s == NULL ? line == NULL : !strcmp(line, s)));
+	//free(line);
+}
+*/
+
 int main(void)
 {
 	char *line = 0;
@@ -102,16 +37,18 @@ int main(void)
 	int fd;
 
 	fd = open("test.txt", O_RDONLY);
-	while ((ret = get_next_line(fd, &line)) > 0)
+	while ((ret = get_next_line(1000, &line)) > 0)
 	{
+		printf("%d\n", ret);
 		printf("%s\n", line);
 		free(line);
 	}
+	printf("%d\n", ret);
 	printf("%s\n", line);
 	free(line);
 	return (0);
 }
-*/
+
 /*
 int main(void)
 {

@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:01 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/23 22:59:56 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/24 01:10:39 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ int set_eof(char **tmp_fd, char **line)
 	return (0);
 }
 
+int free_error(char **tmp_fd, char **line)
+{
+	free(*tmp_fd);
+	free(*line);
+	*line = 0;
+	return (-1);
+}
+
 int get_next_line(int fd, char **line)
 {
 	static char *tmp[OPEN_MAX];
@@ -59,7 +67,7 @@ int get_next_line(int fd, char **line)
 	int nl_idx;
 	int read_size;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || !line)
 		return (-1);
 	if (!tmp[fd])
 		tmp[fd] = ft_strdup("");
@@ -72,10 +80,7 @@ int get_next_line(int fd, char **line)
 			return (set_newline(&tmp[fd], line, nl_idx));
 	}
 	if (read_size < 0)
-	{
-		free(tmp[fd]);
-		return (-1);
-	}
+		return (free_error(&tmp[fd], line));
 	if ((nl_idx = get_nl_idx(&tmp[fd])) != -1)
 		return (set_newline(&tmp[fd], line, nl_idx));
 	return (set_eof(&tmp[fd], line));
