@@ -147,6 +147,7 @@ p[data-value] {
 
 /* The percentage will automatically fall in place as soon as we make the width fluid. Now making widths fluid. */
 
+
 p[data-value]:after {
 	content: attr(data-value) '%';
 	position: absolute; right:0;
