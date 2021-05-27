@@ -5,6 +5,10 @@ class Html
 
 	def initialize(name)
 		@page_name = name
+		if File.file?("#{@page_name}.html")
+			raise RuntimeError, "A file named #{name}.html already exist!"
+			return
+		end
 		head()
 	end
 
@@ -15,6 +19,10 @@ class Html
 	end
 
 	def dump(string)
+		if @contents.include? "</body>\n"
+			raise RuntimeError, "Body has already been closed in #{@page_name}.html."
+			return
+		end
 		if !(@contents.include? "<body>\n")
 			@contents += "<body>\n"
 		end
@@ -22,7 +30,15 @@ class Html
 	end
 
 	def finish
-		@contents += "</body>\n</html>\n"
+		if !(@contents.include? "<body>\n")
+			raise RuntimeError, "There is no body tag in #{@page_name}.html."
+			return
+		elsif @contents.include? "</body>\n"
+			raise RuntimeError, "#{@page_name}.html has already been closed."
+			return
+		else
+			@contents += "</body>\n</html>\n"
+		end
 		@ofile.write(@contents)
 	end
 end
