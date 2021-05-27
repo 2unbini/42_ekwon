@@ -26,7 +26,7 @@ def make_table(array, o_file)
 			o_file.puts "</tr>
 			<tr>"
 		end
-		if elem["position"] === i.to_s
+		if elem["position"] == i.to_s
 			o_file.puts "<td style=\"border: 1px solid black; padding:10px\">
 				<h4>#{elem["name"]}</h4>
 				<ul>
