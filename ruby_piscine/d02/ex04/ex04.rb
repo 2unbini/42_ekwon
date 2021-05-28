@@ -3,7 +3,7 @@
 class Elem
 	attr_reader :tag, :content, :tag_type, :opt
 
-	def initialize (*args)
+	def initialize(*args)
 		if args[0].class == Array
 			@content.push(args[0])
 		else
@@ -15,6 +15,8 @@ class Elem
 			@content = args[1]
 		elsif args[1].class == Array
 			args[1].each { |x| @content.push(x) }
+		elsif args[1].class != NilClass
+			@content = args[1]
 		end
 		if args[2] == "simple"
 			@tag_type = "simple"
@@ -38,6 +40,8 @@ class Elem
 				result += @content.join
 			elsif @content.class == Text
 				result += @content.string
+			elsif @content != nil
+				result += @content
 			end
 			result += " />"
 		else
@@ -46,6 +50,8 @@ class Elem
 				result += @content.join
 			elsif @content.class == Text
 				result += @content.string
+			elsif @content != nil
+				result += @content
 			end
 			result += "</#{@tag}>"
 		end
@@ -57,7 +63,7 @@ end
 class Text
 	attr_reader :string
 
-	def initialize (string)
+	def initialize(string)
 		@string = string
 	end
 end
@@ -180,4 +186,11 @@ class Br < Elem
 	def initialize(*args)
 		super("Br", args[0], 'simple', args[1])
 	end
+end
+
+if $PROGRAM_NAME == __FILE__
+	puts H1.new("Oh no, not again!")
+	#puts Html.new([Head.new([Title.new("Hello ground!")]),
+	#Body.new([H1.new("Oh no, not again!"),
+	#Img.new([], {'src':'http://i.imgur.com/pfp3T.jpg'}) ]) ])
 end

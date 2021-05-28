@@ -3,7 +3,7 @@
 class Elem
 	attr_reader :tag, :content, :tag_type, :opt
 
-	def initialize (*args)
+	def initialize(*args)
 		@tag = args[0]
 		@content = Array.new()
 		@opt = Hash.new()
@@ -51,10 +51,11 @@ end
 class Text
 	attr_reader :string
 
-	def initialize (string)
+	def initialize(string)
 		@string = string
 	end
 end
+
 
 if $PROGRAM_NAME == __FILE__
 	html = Elem.new('html')
