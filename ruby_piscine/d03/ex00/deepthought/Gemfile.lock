@@ -1,0 +1,23 @@
+PATH
+  remote: .
+  specs:
+    deepthought (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    colorize (0.8.1)
+    minitest (5.13.0)
+    rake (13.0.1)
+
+PLATFORMS
+  x86_64-darwin-19
+
+DEPENDENCIES
+  colorize (~> 0.8.1)
+  deepthought!
+  minitest (~> 5.0)
+  rake (~> 13.0)
+
+BUNDLED WITH
+   2.2.18
