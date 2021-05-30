@@ -6,15 +6,15 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:01 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/24 01:10:28 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/05/24 10:46:18 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int get_nl_idx(char **tmp_fd)
+int	get_nl_idx(char **tmp_fd)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	while ((*tmp_fd)[idx] != '\0')
@@ -26,9 +26,9 @@ int get_nl_idx(char **tmp_fd)
 	return (-1);
 }
 
-int set_newline(char **tmp_fd, char **line, int nl_idx)
+int	set_newline(char **tmp_fd, char **line, int nl_idx)
 {
-	char *ptr;
+	char	*ptr;
 
 	(*tmp_fd)[nl_idx] = '\0';
 	ptr = *line;
@@ -40,9 +40,9 @@ int set_newline(char **tmp_fd, char **line, int nl_idx)
 	return (1);
 }
 
-int set_eof(char **tmp_fd, char **line)
+int	set_eof(char **tmp_fd, char **line)
 {
-	char *ptr;
+	char	*ptr;
 
 	ptr = *line;
 	*line = ft_strdup(*tmp_fd);
@@ -52,7 +52,7 @@ int set_eof(char **tmp_fd, char **line)
 	return (0);
 }
 
-int free_error(char **tmp_fd, char **line)
+int	free_error(char **tmp_fd, char **line)
 {
 	free(*tmp_fd);
 	free(*line);
@@ -60,12 +60,12 @@ int free_error(char **tmp_fd, char **line)
 	return (-1);
 }
 
-int get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	static char *tmp[OPEN_MAX];
-	char buf[BUFFER_SIZE + 1];
-	int nl_idx;
-	int read_size;
+	static char	*tmp[OPEN_MAX];
+	char		buf[BUFFER_SIZE + 1];
+	int			nl_idx;
+	int			read_size;
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || !line)
 		return (-1);
