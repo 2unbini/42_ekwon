@@ -2305,3 +2305,64 @@ Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/main.js" for 127.0.0.1 at 2
   
 ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/main.js"):
   
+Started GET "/" for 127.0.0.1 at 2021-05-30 14:46:51 +0900
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1824)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 550.0ms | Allocations: 45143)
+Completed 200 OK in 565ms (Views: 554.3ms | ActiveRecord: 0.0ms | Allocations: 48812)
+
+
+Started GET "/" for 127.0.0.1 at 2021-05-30 14:46:52 +0900
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 44)
+Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/pygment_trac.css" for 127.0.0.1 at 2021-05-30 14:46:52 +0900
+Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/css" for 127.0.0.1 at 2021-05-30 14:46:52 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/css"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/pygment_trac.css"):
+  
+Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/jquery-1.9.1.min.js" for 127.0.0.1 at 2021-05-30 14:46:52 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/jquery-1.9.1.min.js"):
+  
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 59.0ms | Allocations: 50760)
+Completed 200 OK in 60ms (Views: 59.6ms | ActiveRecord: 0.0ms | Allocations: 51628)
+
+
+Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/bootstrap.js" for 127.0.0.1 at 2021-05-30 14:46:52 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/bootstrap.js"):
+  
+Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/main.js" for 127.0.0.1 at 2021-05-30 14:46:52 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/main.js"):
+  
+Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/print.css" for 127.0.0.1 at 2021-05-30 14:46:52 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/print.css"):
+  
+Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/main.js" for 127.0.0.1 at 2021-05-30 14:46:52 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/main.js"):
+  
+Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/stylesheet.css" for 127.0.0.1 at 2021-05-30 14:46:53 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/stylesheet.css"):
+  
+Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/jquery-1.9.1.min.js" for 127.0.0.1 at 2021-05-30 14:46:53 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/jquery-1.9.1.min.js"):
+  
+Started GET "/Rails%20Beginner%20Cheat%20Sheet_files/bootstrap.js" for 127.0.0.1 at 2021-05-30 14:46:53 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/Rails%20Beginner%20Cheat%20Sheet_files/bootstrap.js"):
+  
