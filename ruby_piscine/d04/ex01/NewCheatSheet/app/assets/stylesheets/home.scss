@@ -1,0 +1,30 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.csc_h1 {
+	margin-top: 50px;
+}
+
+
+
+.my-ul{
+	text-align: center;
+	padding: 0;
+}
+
+.my-li {
+	display: inline-block;
+}
+
+.my-footer-p {
+	text-align: center;
+}
+
+footer {
+	text-align: center;
+	background-color: rgb(227, 221, 214);
+	width: 100%;
+	padding: 15px 0px;
+	margin-top: 10px;
+}
