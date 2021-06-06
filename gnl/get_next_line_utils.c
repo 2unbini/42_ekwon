@@ -6,13 +6,13 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:11:37 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/24 11:19:37 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/06 15:04:28 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char const *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	len;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(char const *s)
 	return (len);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -45,11 +45,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		++j;
 	}
 	result[i] = '\0';
-	free((char *)s1);
+	free(s1);
+	s1 = 0;
 	return (result);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(char *s)
 {
 	int		i;
 	char	*ptr;
@@ -59,9 +60,9 @@ char	*ft_strdup(const char *s)
 	len = ft_strlen(s);
 	if (!(ptr = (char *)malloc(sizeof(char) * (len + 1))))
 		return (0);
-	while (((char *)s)[i])
+	while (s[i])
 	{
-		ptr[i] = ((char *)s)[i];
+		ptr[i] = s[i];
 		++i;
 	}
 	ptr[i] = 0;

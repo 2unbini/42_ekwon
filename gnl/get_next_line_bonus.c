@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:01 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/24 11:17:18 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/06 14:56:36 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,16 @@ int	set_newline(char **tmp_fd, char **line, int nl_idx)
 
 	(*tmp_fd)[nl_idx] = '\0';
 	ptr = *line;
-	*line = ft_strdup(*tmp_fd);
+	if ((*line = ft_strdup(*tmp_fd)) == 0)
+		return (free_error(tmp_fd, line));
 	free(ptr);
 	ptr = *tmp_fd;
-	*tmp_fd = ft_strdup((*tmp_fd) + nl_idx + 1);
+	if ((*tmp_fd = ft_strdup((*tmp_fd) + nl_idx + 1)) == 0)
+	{
+		free(*tmp_fd);
+		*tmp_fd = 0;
+		return (-1);
+	}
 	free(ptr);
 	return (1);
 }
@@ -45,8 +51,10 @@ int	set_eof(char **tmp_fd, char **line)
 	char	*ptr;
 
 	ptr = *line;
-	*line = ft_strdup(*tmp_fd);
+	if ((*line = ft_strdup(*tmp_fd)) == 0)
+		return (free_error(tmp_fd, line));
 	free(ptr);
+	ptr = 0;
 	free(*tmp_fd);
 	*tmp_fd = 0;
 	return (0);
@@ -55,6 +63,7 @@ int	set_eof(char **tmp_fd, char **line)
 int	free_error(char **tmp_fd, char **line)
 {
 	free(*tmp_fd);
+	*tmp_fd = 0;
 	free(*line);
 	*line = 0;
 	return (-1);
@@ -72,10 +81,13 @@ int	get_next_line(int fd, char **line)
 	if (!tmp[fd])
 		tmp[fd] = ft_strdup("");
 	*line = ft_strdup("");
+	if (tmp[fd] == 0 || *line == 0)
+		return (free_error(&tmp[fd], line));
 	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[read_size] = '\0';
-		tmp[fd] = ft_strjoin(tmp[fd], buf);
+		if ((tmp[fd] = ft_strjoin(tmp[fd], buf)) == 0)
+			return (-1);
 		if ((nl_idx = get_nl_idx(&tmp[fd])) != -1)
 			return (set_newline(&tmp[fd], line, nl_idx));
 	}
