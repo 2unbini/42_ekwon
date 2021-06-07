@@ -6,95 +6,59 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 21:39:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/07 20:56:47 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/07 22:55:03 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-/*
-int		check_opt(const char **ptr, t_format f)
-{
-   while (ft_isalpha(*ptr) != 0)
-   {
-	   if (f.pre_flag == 1)
-	   {
-		   f.pre_opt *= 10;
-		   f.pre_opt += *ptr - '0';
-	   }
-	   else if (f.pre_flag == 1 && *ptr == '.')
-		   return (0);
-	   else if (f.pre_flag == 0 && *ptr == '.')
-		   f.pre_flag = 1;
-	   else
-	   {
-		   f.width_opt *= 10;
-		   f.width_opt += *ptr - '0';
-	   }
-	   ++ptr;
-   }
-   return (1);
-}
-
-int		check_type(const char **ptr, t_format f)
-{
-	unsigned long long		ret;
-	char					*str;
-
-	ret = 0;
-	if (*ptr == 'd' || *ptr == 'i' || *ptr == 'u' ||
-		|| *ptr == 'x' || *ptr == 'X')
-}
-*/
-
-int		put_num(unsigned int num, char *base, int base_num)
-{
-	int	len;
-
-	len = 0;
-	if (num / base_num)
-		len += put_num(num / base_num, base, base_num);
-	len += write(1, base + (num % base_num), 1);
-	return (len);
-}
-
-int		print_int(va_list ap)
-{
-	int	num;
-	int	print_len;
-
-	print_len = 0;
-	num = va_arg(ap, int);
-	if (num < 0)
-	{
-		print_len += write(1, "-", 1);
-		num *= -1;
-	}
-	return (print_len + put_num(num, "0123456789", 10));
-}
-
-#include <stdio.h>
 int		print_var(const char **s, va_list ap)
 {
-	++(*s);
 	if ('c' == **s)
-		return (printf("[char]"));
+		return (get_char(s, ap));
 	if ('s' == **s)
-		return (printf("[string]"));
+		return (get_string(s, ap));
 	if ('d' == **s || 'i' == **s)
-		return (print_int(ap));
+		return (get_int(s, ap));
 	if ('u' == **s)
-		return (printf("[unsigned int]"));
+		return (get_usint(s, ap));
 	if ('p' == **s)
-		return (printf("[pointer]"));
+		return (get_pointer(s, ap));
 	if ('x' == **s)
-		return (printf("[small hex]"));
+		return (get_shex(s, ap));
 	if ('X' == **s)
-		return (printf("[large hex]"));
-	if ('%' == **s)
-		return (printf("[percentage]"));
+		return (get_lhex(s, ap));
 	return (-1);
+}
+
+void	check_flag(const char **s, t_format f)
+{
+	while ('-' == **s || '0' == **s)
+	{
+		if ('-' == **s)
+			f.minus_align = 1;
+		if ('0' == **s && 0 == f.minus_align)
+			f.zero_space = 1;
+		++s;
+	}
+}
+
+void	check_opt(const char **s, t_format f, va_list ap)
+{
+	char **ptr;
+
+	ptr = s;
+	while (!ft_isalpha(**s))
+	{
+		if ('.' == **s)
+		{
+			f.precision = 1;
+			f.width = ft_atoi(*ptr);
+			f.precision = ft_atoi(*(++s));
+		}
+		++s;
+	}
 }
 
 int		ft_printf(const char *s, ...)
@@ -118,18 +82,14 @@ int		ft_printf(const char *s, ...)
 		ft_putstr(ret);
 		s++; // check another format specifier
 		*/
-		/*
-		if (check_flag(&s, f) == -1)
-			continue ;
-		if (check_opt(&s, f) == 0)
-			return (-1);
-		if (check_type(&s, f)
-		*/
 		if (*s != '%')
 		{
 			cnt += write(1, s++, 1);
 			continue;
 		}
+		s++;
+		check_flag(&s, f);
+		check_opt(&s, f, ap);
 		cnt += print_var(&s, ap);
 		++s;
 	}

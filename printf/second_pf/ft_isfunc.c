@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memfunc.c                                       :+:      :+:    :+:   */
+/*   ft_isfunc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/07 14:30:20 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/07 20:31:13 by ekwon            ###   ########.fr       */
+/*   Created: 2021/06/07 14:26:42 by ekwon             #+#    #+#             */
+/*   Updated: 2021/06/07 21:51:01 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	*ft_memset(void *b, int c, size_t len)
+int		ft_isdigit(int c)
 {
-	size_t i;
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
 
-	i = 0;
-	while (i < len)
-	{
-		((unsigned char*)b)[i] = (unsigned char)c;
-		i++;
-	}
-	return (b);
+int		ft_isalpha(int c)
+{
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
 }

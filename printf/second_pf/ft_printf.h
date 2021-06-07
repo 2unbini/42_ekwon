@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:02:11 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/07 20:35:09 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/07 21:49:23 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,13 @@
 
 typedef struct	s_format
 {
-	int	is_format;
-	int	is_printed;
-	int	zero_flag;
-	int	minus_flag;
-	int	aster_flag;
-	int	pre_flag;
-	int	width_opt;
-	int	pre_opt;
+	int	zero_space;
+	int	minus_align;
+	int	asterisk;
+	int	precision;
+	int	width;
 	int	type;
+	int	negative;
 }				t_format;
 
 int				ft_printf(const char *s, ...);

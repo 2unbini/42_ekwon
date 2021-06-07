@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putfunc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekwon <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 21:29:08 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/06 22:08:43 by ekwon            ###   ########.fr       */
+/*   Created: 2021/06/07 14:36:14 by ekwon             #+#    #+#             */
+/*   Updated: 2021/06/07 14:43:41 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
+#include <unistd.h>
 
-typedef struct		s_format
+void	ft_putstr(char *str, char c)
 {
-
-}					t_format
-
-int		ft_printf(const char *s, ...);
-
-#endif
+	while (*str != c)
+	{
+		write(1, str, 1);
+		str++;
+		cnt++;
+	}
+}
