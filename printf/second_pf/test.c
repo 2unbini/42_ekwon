@@ -4,6 +4,6 @@
 
 int main(void)
 {
-	ft_printf("int : %d\n", -1120);
-	printf("[%-4%]\n");
+	ft_printf("[%5d]\n", 10);
+	printf("[%5d]\n", 10);
 }

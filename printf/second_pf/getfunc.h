@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putfunc.c                                       :+:      :+:    :+:   */
+/*   getfunc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/07 14:36:14 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/08 16:19:47 by ekwon            ###   ########.fr       */
+/*   Created: 2021/06/08 15:26:10 by ekwon             #+#    #+#             */
+/*   Updated: 2021/06/08 19:40:07 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
+#ifndef GETFUNC_H
+# define GETFUNC_H
 
-int		ft_putstr(char *str)
-{
-	char	*ptr;
-	int		cnt;
+# include "ft_printf.h"
 
-	ptr = str;
-	cnt = 0;
-	while (*str != 0)
-	{
-		write(1, str, 1);
-		++str;
-		++cnt;
-	}
-	free(ptr);
-	str = 0;
-	return (cnt);
-}
+int		max_len(t_format f, int arg);
+int		is_zero_space_valid(t_format f);
+int		alloc_ret(char **ret, int len, t_format f);
+void	set_istring(char **ret, int arg, t_format f);
+int		get_int(t_format f, va_list ap);
+
+#endif

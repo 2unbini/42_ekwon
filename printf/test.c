@@ -2,13 +2,14 @@
 int main(void)
 {
 	printf("[%4%]\n");
-	printf("%4%d\n");
-	printf("%%\n");
-	printf("%%%d\n", 3);
+	printf("%4%c\n");
+	printf("123avab%\n");
+	printf("%%%c\n", 'c');
 	printf("-0*%%\n");
-	printf("[%-*.*d]\n", 5, 4, 3);
+	printf("[%-*.*c]\n", 5, 4, 'c');
 	printf("[%-*.%]\n", 5);
-	printf("[%- 75.2d]\n", 4);
-	printf("[%-5.*4d]\n", -2, 4);
+	printf("[%- 75.2c]\n", 'c');
+	printf("[%-5.*4c]\n", -2, 'c');
+	printf("[%5.3c]\n", 'c');
 	return (0);
 }

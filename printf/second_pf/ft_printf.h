@@ -6,25 +6,12 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:02:11 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/07 21:49:23 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/08 19:20:40 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-
-/*
-# define GET_BIT(flag, idx) (!!((1 << idx) & flag))
-# define SET_BIT_T(flag, idx) ((1 << idx) | flag)
-# define SET_BIT_F(flag, idx) ((~(1 << idx)) & flag)
-*/
-
-// t_format : true = 1, false = 0
-// functions : normal flow = 1, return = 0, continue = -1
-// type[9] = {c, s, d, i, u, p, x, X, %}
-// check strings before first % discovered
-// if % discovered, returns 1
-// if not, returns 0
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -37,10 +24,14 @@ typedef struct	s_format
 	int	asterisk;
 	int	precision;
 	int	width;
-	int	type;
 	int	negative;
+	int base;
+	int digit;
 }				t_format;
 
-int				ft_printf(const char *s, ...);
+int			ft_printf(const char *s, ...);
+void		check_flag(const char **s, t_format f);
+void		check_opt(const char **s, t_format f, va_list ap);
+int			print_var(const char **s, t_format f, va_list ap);
 
 #endif

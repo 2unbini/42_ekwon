@@ -6,22 +6,14 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:31:57 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/07 22:54:10 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/08 19:37:41 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdarg.h>
 #include "libft.h"
 
-static int	is_wspace(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n'
-			|| c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	else
-		return (0);
-}
-
-static int	check_first(char c, int *i)
+static int	check_first(char c, long long *i)
 {
 	if ('+' == c || ft_isdigit(c))
 	{
