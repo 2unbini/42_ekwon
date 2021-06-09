@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getfunc.h                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/08 15:26:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/10 00:48:47 by ekwon            ###   ########.fr       */
+/*   Created: 2021/05/05 21:17:27 by ekwon             #+#    #+#             */
+/*   Updated: 2021/05/11 14:42:16 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GETFUNC_H
-# define GETFUNC_H
+#include "libft.h"
 
-# include "ft_printf.h"
+char	*ft_strdup(const char *s1)
+{
+	int		i;
+	char	*ptr;
 
-int		max_len(t_format *f, int arg);
-int		is_zero_space_valid(t_format *f);
-int		alloc_ret(char **ret, int len, t_format *f);
-void	set_istring(char **ret, int arg, t_format *f);
-int		get_int(t_format *f, va_list ap);
-
-#endif
+	i = 0;
+	if (!(ptr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
+		return (NULL);
+	while (s1[i])
+	{
+		ptr[i] = s1[i];
+		i++;
+	}
+	ptr[i] = 0;
+	return (ptr);
+}

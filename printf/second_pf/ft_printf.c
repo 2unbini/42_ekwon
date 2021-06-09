@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 21:39:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/08 19:58:54 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/09 23:21:34 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 #include "getfunc.h"
 #include "libft.h"
 
-
-
-#include <stdio.h>
-
-int		print_var(const char **s, t_format f, va_list ap)
+int		print_var(const char **s, t_format *f, va_list ap)
 {
 	/*
 	if ('c' == **s)
@@ -41,32 +37,54 @@ int		print_var(const char **s, t_format f, va_list ap)
 	return (1);
 }
 
-void	check_flag(const char **s, t_format f)
+void	check_flag(const char **s, t_format *f)
 {
 	while ('-' == **s || '0' == **s)
 	{
 		if ('-' == **s)
-			f.minus_align = 1;
-		if ('0' == **s && 0 == f.minus_align)
-			f.zero_space = 1;
+			f->minus_align = 1;
+		if ('0' == **s && 0 == f->minus_align)
+			f->zero_space = 1;
 		++(*s);
 	}
 }
 
-void	check_opt(const char **s, t_format f, va_list ap)
+void	check_opt(const char **s, t_format *f, va_list ap)
 {
-	char **ptr;
+	int		tmp;
 
-	ptr = (char **)s;
-	while (!ft_isalpha(**s))
+	tmp = 0;
+	while ('.' != **s && !ft_isalpha(**s))
 	{
-		if ('.' == **s)
+		if ('*' == **s)
+			tmp = va_arg(ap, int);
+		else
+			tmp = **s - '0';
+		if (tmp < 0)
 		{
-			f.precision = 1;
-			f.width = ft_atoi(*ptr, ap);
-			f.precision = ft_atoi((++(*s)), ap);
+			tmp *= -1;
+			f->minus_align = 1;
 		}
+		f->width = (f->width * 10) + tmp;
 		++(*s);
+	}
+	if ('.' == **s)
+	{
+		++(*s);
+		while (!ft_isalpha(**s))
+		{
+			if ('*' == **s)
+				tmp = va_arg(ap, int);
+			else
+				tmp = **s - '0';
+			if (tmp < 0)
+			{
+				++(*s);
+				continue;
+			}
+			f->precision = (f->precision * 10) + tmp;
+			++(*s);
+		}
 	}
 }
 
@@ -89,9 +107,9 @@ int		ft_printf(const char *s, ...)
 			continue;
 		}
 		s++;
-		check_flag(&s, f);
-		check_opt(&s, f, ap);
-		if ((check = print_var(&s, f, ap)) == 0)
+		check_flag(&s, &f);
+		check_opt(&s, &f, ap);
+		if ((check = print_var(&s, &f, ap)) == 0)
 			return (-1);
 		cnt += check;
 		++s;

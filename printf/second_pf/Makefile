@@ -5,7 +5,7 @@ SRCS =  ft_atoi.c ft_isfunc.c ft_memfunc.c ft_printf.c ft_putfunc.c get_int.c
 OBJS = $(SRCS:.c=.o)
 all : $(NAME)
 
-$(NAME) : $(OBJS) $(LIBFT)
+$(NAME) : $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 %.o : %.c
@@ -13,11 +13,9 @@ $(NAME) : $(OBJS) $(LIBFT)
 
 clean :
 	rm -f $(OBJS)
-	make clean -C ./libft
 
 fclean :
 	rm -f $(NAME) $(OBJS)
-	make fclean -C ./libft
 
 re :
 	make fclean
