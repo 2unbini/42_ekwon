@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:30:20 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/10 00:46:38 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/10 21:59:06 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,29 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-void	*my_alloc(size_t count, size_t size, char c)
+void	*ft_calloc(size_t count, size_t size)
 {
 	void	*ptr;
 	size_t	i;
 
 	i = 0;
 	if (!(ptr = (void*)malloc(size * count)))
+		return (NULL);
+	while (i < size * count)
+	{
+		((unsigned char *)ptr)[i] = 0;
+		i++;
+	}
+	return (ptr);
+}
+
+void	*my_alloc(size_t count, size_t size, char c)
+{
+	void	*ptr;
+	size_t	i;
+
+	i = 0;
+	if (!(ptr = (void*)ft_calloc(count, size)))
 		return (0);
 	while (i < size * count)
 	{
