@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:01 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/06 14:36:39 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/11 14:10:19 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	get_next_line(int fd, char **line)
 	{
 		buf[read_size] = '\0';
 		if ((tmp[fd] = ft_strjoin(tmp[fd], buf)) == 0)
-			return (-1);
+			return (free_func(&tmp[fd]));
 		if ((nl_idx = get_nl_idx(&tmp[fd])) != -1)
 			return (set_newline(&tmp[fd], line, nl_idx));
 	}

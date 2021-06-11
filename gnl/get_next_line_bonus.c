@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:01 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/06 14:56:36 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/11 14:10:40 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ int	set_newline(char **tmp_fd, char **line, int nl_idx)
 	(*tmp_fd)[nl_idx] = '\0';
 	ptr = *line;
 	if ((*line = ft_strdup(*tmp_fd)) == 0)
-		return (free_error(tmp_fd, line));
+	{
+		free(*tmp_fd);
+		*tmp_fd = 0;
+		return (-1);
+	}
 	free(ptr);
 	ptr = *tmp_fd;
 	if ((*tmp_fd = ft_strdup((*tmp_fd) + nl_idx + 1)) == 0)
@@ -52,7 +56,11 @@ int	set_eof(char **tmp_fd, char **line)
 
 	ptr = *line;
 	if ((*line = ft_strdup(*tmp_fd)) == 0)
-		return (free_error(tmp_fd, line));
+	{
+		free(*tmp_fd);
+		*tmp_fd = 0;
+		return (-1);
+	}
 	free(ptr);
 	ptr = 0;
 	free(*tmp_fd);
@@ -87,7 +95,7 @@ int	get_next_line(int fd, char **line)
 	{
 		buf[read_size] = '\0';
 		if ((tmp[fd] = ft_strjoin(tmp[fd], buf)) == 0)
-			return (-1);
+			return (free_func(&tmp[fd]));
 		if ((nl_idx = get_nl_idx(&tmp[fd])) != -1)
 			return (set_newline(&tmp[fd], line, nl_idx));
 	}

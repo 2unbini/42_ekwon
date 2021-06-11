@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:11:37 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/06 15:04:28 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/11 13:36:01 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,11 @@ char	*ft_strdup(char *s)
 	}
 	ptr[i] = 0;
 	return (ptr);
+}
+
+int		free_func(char **s)
+{
+	free(*s);
+	*s = 0;
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:27 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/06 14:52:07 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/11 14:11:38 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 size_t	ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *s);
+int		free_func(char **s);
 int		set_newline(char **tmp_fd, char **line, int nl_idx);
 int		set_eof(char **tmp_fd, char **line);
 int		free_error(char **tmp_fd, char **line);
