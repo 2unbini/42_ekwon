@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:01 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/11 14:10:40 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/11 20:35:01 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	set_newline(char **tmp_fd, char **line, int nl_idx)
 		return (-1);
 	}
 	free(ptr);
+	ptr = 0;
 	return (1);
 }
 
@@ -79,7 +80,7 @@ int	free_error(char **tmp_fd, char **line)
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*tmp[OPEN_MAX];
+	static char	*tmp[OPEN_MAX] = {0, };
 	char		buf[BUFFER_SIZE + 1];
 	int			nl_idx;
 	int			read_size;
@@ -90,12 +91,12 @@ int	get_next_line(int fd, char **line)
 		tmp[fd] = ft_strdup("");
 	*line = ft_strdup("");
 	if (tmp[fd] == 0 || *line == 0)
-		return (free_error(&tmp[fd], line));
+		return (-1);
 	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[read_size] = '\0';
 		if ((tmp[fd] = ft_strjoin(tmp[fd], buf)) == 0)
-			return (free_func(&tmp[fd]));
+			return (-1);
 		if ((nl_idx = get_nl_idx(&tmp[fd])) != -1)
 			return (set_newline(&tmp[fd], line, nl_idx));
 	}

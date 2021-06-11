@@ -6,20 +6,20 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:01 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/11 14:10:19 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/11 20:35:17 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_nl_idx(char **tmp_fd)
+int	get_nl_idx(char *tmp_fd)
 {
 	int	idx;
 
 	idx = 0;
-	while ((*tmp_fd)[idx] != '\0')
+	while (tmp_fd[idx] != '\0')
 	{
-		if ((*tmp_fd)[idx] == '\n')
+		if (tmp_fd[idx] == '\n')
 			return (idx);
 		idx++;
 	}
@@ -33,7 +33,11 @@ int	set_newline(char **tmp_fd, char **line, int nl_idx)
 	(*tmp_fd)[nl_idx] = '\0';
 	ptr = *line;
 	if ((*line = ft_strdup(*tmp_fd)) == 0)
-		return (free_error(tmp_fd, line));
+	{
+		free(*tmp_fd);
+		*tmp_fd = 0;
+		return (-1);
+	}
 	free(ptr);
 	ptr = *tmp_fd;
 	if ((*tmp_fd = ft_strdup((*tmp_fd) + nl_idx + 1)) == 0)
@@ -43,6 +47,7 @@ int	set_newline(char **tmp_fd, char **line, int nl_idx)
 		return (-1);
 	}
 	free(ptr);
+	ptr = 0;
 	return (1);
 }
 
@@ -52,7 +57,11 @@ int	set_eof(char **tmp_fd, char **line)
 
 	ptr = *line;
 	if ((*line = ft_strdup(*tmp_fd)) == 0)
-		return (free_error(tmp_fd, line));
+	{
+		free(*tmp_fd);
+		*tmp_fd = 0;
+		return (-1);
+	}
 	free(ptr);
 	ptr = 0;
 	free(*tmp_fd);
@@ -71,7 +80,7 @@ int	free_error(char **tmp_fd, char **line)
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*tmp[OPEN_MAX];
+	static char	*tmp[OPEN_MAX] = {0, };
 	char		buf[BUFFER_SIZE + 1];
 	int			nl_idx;
 	int			read_size;
@@ -82,18 +91,18 @@ int	get_next_line(int fd, char **line)
 		tmp[fd] = ft_strdup("");
 	*line = ft_strdup("");
 	if (tmp[fd] == 0 || *line == 0)
-		return (free_error(&tmp[fd], line));
+		return (-1);
 	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[read_size] = '\0';
 		if ((tmp[fd] = ft_strjoin(tmp[fd], buf)) == 0)
-			return (free_func(&tmp[fd]));
-		if ((nl_idx = get_nl_idx(&tmp[fd])) != -1)
+			return (-1);
+		if ((nl_idx = get_nl_idx(tmp[fd])) != -1)
 			return (set_newline(&tmp[fd], line, nl_idx));
 	}
 	if (read_size < 0)
 		return (free_error(&tmp[fd], line));
-	if ((nl_idx = get_nl_idx(&tmp[fd])) != -1)
+	if ((nl_idx = get_nl_idx(tmp[fd])) != -1)
 		return (set_newline(&tmp[fd], line, nl_idx));
 	return (set_eof(&tmp[fd], line));
 }

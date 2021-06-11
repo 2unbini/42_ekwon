@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:11:37 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/11 13:36:01 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/11 20:28:53 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,16 @@ char	*ft_strjoin(char *s1, char *s2)
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	if (!(result = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1))))
+	{
+		free_func(&s1);
 		return (0);
+	}
 	while (++i < s1_len)
 		result[i] = s1[i];
 	while (i < s1_len + s2_len)
-	{
-		result[i] = s2[j];
-		++i;
-		++j;
-	}
+		result[i++] = s2[j++];
 	result[i] = '\0';
-	free(s1);
-	s1 = 0;
+	free_func(&s1);
 	return (result);
 }
 

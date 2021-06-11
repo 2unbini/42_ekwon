@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:51:27 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/11 14:11:38 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/11 20:26:47 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		free_func(char **s);
 int		set_newline(char **tmp_fd, char **line, int nl_idx);
 int		set_eof(char **tmp_fd, char **line);
 int		free_error(char **tmp_fd, char **line);
-int		get_nl_idx(char **tmp_fd);
+int		get_nl_idx(char *tmp_fd);
 int		get_next_line(int fd, char **line);
 
 #endif
