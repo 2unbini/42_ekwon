@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 13:00:13 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/10 22:28:40 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/11 23:35:29 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ int		max_len(t_format *f, int arg)
 
 	f->digit = 1;
 	result = 0;
+	if (arg < 0)
+	{
+		f->negative = 1;
+		if (arg == -2147483648)
+			arg = -2147483647;
+		arg *= -1;
+	}
 	while (arg /= 10)
 		f->digit += 1;
 	if (f->width >= f->precision && f->width >= f->digit)
@@ -46,6 +53,7 @@ int		alloc_ret(char **ret, int len, t_format *f)
 	return (1);
 }
 
+#include <stdio.h>
 int		set_istring(char **ret, int arg, t_format *f, int len)
 {
 	int		i;
@@ -53,41 +61,35 @@ int		set_istring(char **ret, int arg, t_format *f, int len)
 	int		num;
 	char	*tmp;
 
-	i = 0;
+	i = f->digit;
 	idx = 0;
 	num = 0;
-	if (!(tmp = (char *)ft_calloc(len, sizeof(char))))
-		return (0);
 	if (arg == 0)
 	{
 		while (i < len)
-			tmp[i++] = ' ';
+			(*ret)[i++] = ' ';
 		return (1);
 	}
-	while (arg)
-	{
-		tmp[i++] = (arg % 10) + '0';
-		arg /= 10;
-	}
+	tmp = ft_ritoa(arg);
+	//printf("tmp after itoa: %s\n", tmp);
 	if (f->precision && f->precision > f->digit)
 		while (num++ < (f->precision - f->digit))
-			tmp[i++] = '0';
+			ft_strcpy(&tmp, "0", &i);
+	//printf("tmp after precision: %s\n", tmp);
 	num = 0;
 	if (f->negative)
 	{
 		if (f->zero_space && !(f->precision) && f->width > i + 1)
 			while (num++ < f->width - (i + 1))
-				tmp[i++] = '0';
+				ft_strcpy(&tmp, "0", &i);
 		tmp[i] = '-';
 	}
+	//printf("tmp after negative space: %s\n", tmp);
 	if (!(f->minus_align) && f->width > i + 1)
 		idx = f->width - (i + 1);
 	while (i >= 0)
-	{
-		(*ret)[idx++] = tmp[i];
-		tmp[i--] = 0;
-	}
-	free(tmp);
+		(*ret)[idx++] = tmp[i--];
+	//printf("ret: %s\n", *ret);
 	tmp = 0;
 	return (1);
 }
@@ -207,11 +209,6 @@ int		get_int(t_format *f, va_list ap)
 	int		len;
 
 	arg = va_arg(ap, int);
-	if (arg < 0)
-	{
-		f->negative = 1;
-		arg *= -1;
-	}
 	len = max_len(f, arg);
 	if (!(alloc_ret(&ret, len, f)))
 		return (0);

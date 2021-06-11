@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:30:20 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/10 21:59:06 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/11 23:42:27 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,18 @@ void	*my_alloc(size_t count, size_t size, char c)
 	}
 	((unsigned char *)ptr)[i] = 0;
 	return (ptr);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t i;
+
+	i = 0;
+	if (n == 0)
+		return ;
+	while (i < n)
+	{
+		((unsigned char *)s)[i] = 0;
+		i++;
+	}
 }
