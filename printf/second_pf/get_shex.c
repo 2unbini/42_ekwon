@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 13:00:13 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 23:04:14 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 23:10:50 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static void	set_string_cont(char **ret, char **tmp, t_format *f, int *i)
 		idx = f->width - *i;
 	while (--(*i) >= 0)
 		(*ret)[idx++] = (*tmp)[*i];
-
 }
 
 static void	set_string(char **ret, int arg, t_format *f, int len)
@@ -97,7 +96,7 @@ static void	set_string(char **ret, int arg, t_format *f, int len)
 	set_string_cont(ret, &tmp, f, &i);
 }
 
-int		get_shex(t_format *f, va_list ap)
+int			get_shex(t_format *f, va_list ap)
 {
 	char			*ret;
 	unsigned int	arg;

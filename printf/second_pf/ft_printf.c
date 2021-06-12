@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 21:39:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 23:07:58 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 23:14:44 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,16 @@ int		print_var(const char **s, t_format *f, va_list ap)
 	int	ret;
 
 	ret = -1;
-	/*
-	if ('c' == **s)
-		ret = get_char(f, ap);
-	if ('s' == **s)
-		ret = get_string(f, ap);
-	*/
+//	if ('c' == **s)
+//		ret = get_char(f, ap);
+//	if ('s' == **s)
+//		ret = get_string(f, ap);
 	if ('d' == **s || 'i' == **s)
 		ret = get_int(f, ap);
 	if ('u' == **s)
 		ret = get_usint(f, ap);
-	//if ('p' == **s)
-	//	ret = get_pointer(f, ap);
+//	if ('p' == **s)
+//		ret = get_pointer(f, ap);
 	if ('x' == **s)
 		ret = get_shex(f, ap);
 	if ('X' == **s)
