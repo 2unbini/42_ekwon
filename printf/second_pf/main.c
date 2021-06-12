@@ -5,7 +5,6 @@
 
 int main(void)
 {
-	int d = -135;
-	ft_printf("-->|%-3.*d|<--\n", 4, d);
-	ft_printf("-->|%-3.0d|<--\n", d);
+	int d = 0;
+	ft_printf("-->|%0*.*d|<--\n", 4, -4, d);
 }

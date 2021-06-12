@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 21:39:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 13:00:31 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 17:40:44 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ int		print_var(const char **s, t_format *f, va_list ap)
 	if ('X' == **s)
 		return (get_lhex(f, ap));
 	*/
-	return (1);
+	return (-1);
 }
 
 void	check_flag(const char **s, t_format *f)
 {
+	++(*s);
 	while ('-' == **s || '0' == **s)
 	{
 		if ('-' == **s)
@@ -60,10 +61,7 @@ void	check_width(const char **s, t_format *f, va_list ap)
 	while ('.' != **s && !ft_isalpha(**s))
 	{
 		if ('*' == **s)
-		{
 			tmp = va_arg(ap, int);
-			f->asterisk += 1;
-		}
 		else
 			tmp = **s - '0';
 		if (tmp < 0)
@@ -76,37 +74,58 @@ void	check_width(const char **s, t_format *f, va_list ap)
 		++(*s);
 	}
 	if ('.' == **s)
+	{
 		++(*s);
+		f->dot = 1;
+	}
+}
+
+void	check_precision_dot(const char **s, t_format *f)
+{
+	if (ft_isalpha(**s) && f->dot)
+	{
+		f->precision = 0;
+		f->zero_space = 0;
+	}
 }
 
 void	check_precision(const char **s, t_format *f, va_list ap, int tmp)
 {
-	if (ft_isalpha(**s) && !(f->precision))
-		f->zero_space = 0;
+	check_precision_dot(s, f);
+	f->precision = 0;
 	while (!ft_isalpha(**s))
 	{
-		if ('*' == **s)
+		if ('-' == **s)
 		{
-			tmp = va_arg(ap, int);
-			//f->asterisk += 2;
+			f->precision = -1;
+			while (!ft_isalpha(**s))
+				++(*s);
+			return ;
 		}
-		else
-			tmp = **s - '0';
+		tmp = ('*' == **s) ? va_arg(ap, int) : **s - '0';
 		if (tmp < 0)
 		{
 			++(*s);
+			f->precision = -1;
 			continue;
 		}
-		if (tmp < 0 /*&& f->asterisk == 1*/)
-		{
-			f->width = 0;
-			tmp *= -1;
-		}
 		f->precision = (f->precision * 10) + tmp;
+		if (f->precision != -1)
+			f->zero_space = 0;
 		++(*s);
-		//if (f->asterisk == 2)
-		//	f->zero_space = 1;
 	}
+}
+
+void	init_flags(t_format *f)
+{
+	f->zero_space = 0;
+	f->minus_align = 0;
+	f->dot = 0;
+	f->precision = -1;
+	f->width = 0;
+	f->negative = 0;
+	f->digit = 0;
+	f->zero = 0;
 }
 
 int		ft_printf(const char *s, ...)
@@ -114,11 +133,9 @@ int		ft_printf(const char *s, ...)
 	va_list		ap;
 	t_format	f;
 	int			cnt;
-	int			check;
+	int			print_num;
 
 	cnt = 0;
-	check = 0;
-	ft_memset(&f, 0, sizeof(t_format));
 	va_start(ap, s);
 	while (*s != '\0')
 	{
@@ -127,13 +144,14 @@ int		ft_printf(const char *s, ...)
 			cnt += write(1, s++, 1);
 			continue;
 		}
-		s++;
+		init_flags(&f);
 		check_flag(&s, &f);
 		check_width(&s, &f, ap);
-		check_precision(&s, &f, ap, 0);
-		if ((check = print_var(&s, &f, ap)) == 0)
+		if (f.dot)
+			check_precision(&s, &f, ap, 0);
+		if ((print_num = print_var(&s, &f, ap)) == -1)
 			return (-1);
-		cnt += check;
+		cnt += print_num;
 		++s;
 	}
 	return (cnt);

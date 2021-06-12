@@ -21,5 +21,8 @@ int main(void)
 	printf("|%0*.*d|\n", 5, -4, -12);
 	printf("|%0-5.4d|\n", -12);
 	printf("|%0*.*d|\n", 1, -4, -12);
+	printf("%.d\n", 0);
+	printf("%.d\n", 10);
+	printf("%3\n");
 	return (0);
 }

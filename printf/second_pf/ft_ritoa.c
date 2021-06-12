@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:17:44 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/11 23:46:52 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 16:10:40 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ char		*ft_ritoa(int n)
 
 	i = 0;
 	j = 0;
-	if (n == -2147483648)
-		return ("2147483648");
+	while (j < 10)
+		temp[j++] = '\0';
 	if (n == 0)
-		return ("0");
+	{
+		temp[0] = '0';
+		return (temp);
+	}
 	sign = get_sign(n);
 	n *= sign;
 	while (n)
