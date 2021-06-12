@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 13:00:13 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 17:20:58 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 18:04:23 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,37 @@ int		alloc_ret(char **ret, int len, t_format *f)
 	return (1);
 }
 
+void	set_istring_cont(char **ret, char **tmp, t_format *f, int *i)
+{
+	int	j;
+	int	num;
+	int	idx;
+
+	j = 0;
+	num = 0;
+	idx = 0;
+	if (f->zero_space && f->width > (*i + 1))
+	{
+		j = f->width - (*i + 1);
+		while (num++ < j)
+			(*tmp)[(*i)++] = '0';
+	}
+	if (f->negative)
+		(*tmp)[(*i)++] = '-';
+	if (!(f->minus_align) && f->width > *i)
+		idx = f->width - *i;
+	while (--(*i) >= 0)
+		(*ret)[idx++] = (*tmp)[*i];
+
+}
+
 void	set_istring(char **ret, int arg, t_format *f, int len)
 {
 	int		i;
-	int		j;
-	int		idx;
 	int		num;
 	char	*tmp;
 
 	i = f->digit;
-	j = 0;
-	idx = 0;
 	num = 0;
 	if (arg == 0 && f->precision == 0)
 	{
@@ -81,20 +101,7 @@ void	set_istring(char **ret, int arg, t_format *f, int len)
 	if (f->precision != -1 && f->precision > f->digit)
 		while (num++ < (f->precision - f->digit))
 			tmp[i++] = '0';
-	num = 0;
-	if (f->zero_space && f->width > (i + 1))
-	{
-		j = f->width - (i + 1);
-		while (num++ < j)
-			tmp[i++] = '0';
-	}
-	if (f->negative)
-		tmp[i++] = '-';
-	if (!(f->minus_align) && f->width > i)
-		idx = f->width - i;
-	while (--i >= 0)
-		(*ret)[idx++] = tmp[i];
-	tmp = 0;
+	set_istring_cont(ret, &tmp, f, &i);
 }
 
 int		get_int(t_format *f, va_list ap)
