@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:17:44 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/11 22:04:05 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 22:27:09 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,17 @@ char		*ft_itoa(int n)
 	int			i;
 	int			j;
 	int			sign;
-	char		temp[10];
-	static char	result[10];
+	static char	temp[10];
 
 	i = 0;
 	j = 0;
-	if (n == -2147483648)
-		return ("2147483648");
+	while (j < 10)
+		temp[j++] = '\0';
 	if (n == 0)
-		return ("0");
+	{
+		temp[0] = '0';
+		return (temp);
+	}
 	sign = get_sign(n);
 	n *= sign;
 	while (n)
@@ -42,7 +44,5 @@ char		*ft_itoa(int n)
 		n /= 10;
 		i++;
 	}
-	while (--i >= 0)
-		result[j++] = temp[i];
-	return (result);
+	return (temp);
 }

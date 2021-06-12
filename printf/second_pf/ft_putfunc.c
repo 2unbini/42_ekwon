@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:36:14 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 17:17:16 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 22:52:54 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int		ft_strlen(char *str)
 
 int		ft_putstr(char **str)
 {
-	int		cnt;
-	int		i;
-	int		len;
+	int	i;
+	int cnt;
+	int	len;
 
 	i = 0;
 	cnt = 0;

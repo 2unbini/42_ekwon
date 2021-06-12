@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ritoa.c                                         :+:      :+:    :+:   */
+/*   ft_utoh.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:17:44 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 16:10:40 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 22:58:23 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_sign(int n)
-{
-	if (n >= 0)
-		return (1);
-	else
-		return (-1);
-}
-
-char		*ft_ritoa(int n)
+char		*ft_utoh(unsigned int n, char *base)
 {
 	int			i;
 	int			j;
-	int			sign;
 	static char	temp[10];
 
 	i = 0;
@@ -36,12 +27,10 @@ char		*ft_ritoa(int n)
 		temp[0] = '0';
 		return (temp);
 	}
-	sign = get_sign(n);
-	n *= sign;
 	while (n)
 	{
-		temp[i] = n % 10 + '0';
-		n /= 10;
+		temp[i] = base[n % 16];
+		n /= 16;
 		i++;
 	}
 	return (temp);

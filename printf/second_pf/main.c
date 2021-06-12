@@ -6,5 +6,6 @@
 int main(void)
 {
 	int d = 0;
-	ft_printf("-->|%0*.*d|<--\n", 4, -4, d);
+	unsigned int u = 4294967161;
+	ft_printf("-->|%-4.x|<--\n", u);
 }

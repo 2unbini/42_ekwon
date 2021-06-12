@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_int.c                                          :+:      :+:    :+:   */
+/*   get_usint.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 13:00:13 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 22:29:41 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 22:36:58 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-static int	max_len(t_format *f, int arg)
+static int	max_len(t_format *f, unsigned int arg)
 {
 	int result;
 
 	f->digit = 1;
 	result = 0;
-	if (arg < 0)
-	{
-		f->negative = 1;
-		if (arg == -2147483648)
-			arg = -2147483647;
-		arg *= -1;
-	}
 	while (arg /= 10)
 		f->digit += 1;
 	if (f->width >= f->precision && f->width >= f->digit)
@@ -59,7 +52,7 @@ static int	alloc_ret(char **ret, int len, t_format *f)
 	return (1);
 }
 
-static void	set_istring_cont(char **ret, char **tmp, t_format *f, int *i)
+static void	set_string_cont(char **ret, char **tmp, t_format *f, int *i)
 {
 	int	j;
 	int	num;
@@ -80,9 +73,10 @@ static void	set_istring_cont(char **ret, char **tmp, t_format *f, int *i)
 		idx = f->width - *i;
 	while (--(*i) >= 0)
 		(*ret)[idx++] = (*tmp)[*i];
+
 }
 
-static void	set_istring(char **ret, int arg, t_format *f, int len)
+static void	set_string(char **ret, int arg, t_format *f, int len)
 {
 	int		i;
 	int		num;
@@ -96,27 +90,27 @@ static void	set_istring(char **ret, int arg, t_format *f, int len)
 			(*ret)[i++] = ' ';
 		return ;
 	}
-	tmp = ft_itoa(arg);
+	tmp = ft_utoa(arg);
 	if (f->precision != -1 && f->precision > f->digit)
 		while (num++ < (f->precision - f->digit))
 			tmp[i++] = '0';
-	set_istring_cont(ret, &tmp, f, &i);
+	set_string_cont(ret, &tmp, f, &i);
 }
 
-int			get_int(t_format *f, va_list ap)
+int		get_usint(t_format *f, va_list ap)
 {
-	char	*ret;
-	int		arg;
-	int		len;
-	int		status;
+	char			*ret;
+	unsigned int	arg;
+	int				len;
+	int				status;
 
-	arg = va_arg(ap, int);
+	arg = va_arg(ap, unsigned int);
 	if (arg == 0)
 		f->zero = 1;
 	len = max_len(f, arg);
 	if (!(status = alloc_ret(&ret, len, f)))
 		return (-1);
 	if (status != 2)
-		set_istring(&ret, arg, f, len);
+		set_string(&ret, arg, f, len);
 	return (ft_putstr(&ret));
 }

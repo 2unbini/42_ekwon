@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 21:17:27 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 16:19:46 by ekwon            ###   ########.fr       */
+/*   Created: 2021/05/09 15:17:44 by ekwon             #+#    #+#             */
+/*   Updated: 2021/06/12 22:36:46 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(char *s1)
+char		*ft_utoa(unsigned int n)
 {
-	int		i;
-	char	*ptr;
+	int			i;
+	int			j;
+	static char	temp[10];
 
 	i = 0;
-	if (!(ptr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
-		return (0);
-	while (s1[i])
+	j = 0;
+	while (j < 10)
+		temp[j++] = '\0';
+	if (n == 0)
 	{
-		ptr[i] = s1[i];
+		temp[0] = '0';
+		return (temp);
+	}
+	while (n)
+	{
+		temp[i] = n % 10 + '0';
+		n /= 10;
 		i++;
 	}
-	ptr[i] = 0;
-	return (ptr);
+	return (temp);
 }

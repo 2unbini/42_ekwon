@@ -3,15 +3,17 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = libftprintf.a
 SRCS =  ft_printf.c \
 		ft_printf_util.c \
-		ft_atoi.c \
 		ft_isfunc.c \
 		ft_memfunc.c \
 		ft_putfunc.c \
-		get_int.c \
 		ft_itoa.c \
-		ft_strcpy.c \
-		ft_ritoa.c \
-		ft_strdup.c
+		ft_utoa.c \
+		ft_utoh.c \
+		ft_string.c \
+		get_int.c \
+		get_usint.c \
+		get_shex.c \
+		get_lhex.c
 OBJS = $(SRCS:.c=.o)
 all : $(NAME)
 

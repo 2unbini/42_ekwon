@@ -6,25 +6,12 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:30:20 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 15:49:00 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 20:13:50 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	size_t i;
-
-	i = 0;
-	while (i < len)
-	{
-		((unsigned char*)b)[i] = (unsigned char)c;
-		i++;
-	}
-	return (b);
-}
 
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -57,18 +44,4 @@ void	*my_alloc(size_t count, size_t size, char c)
 	}
 	((unsigned char *)ptr)[i] = 0;
 	return (ptr);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	size_t i;
-
-	i = 0;
-	if (n == 0)
-		return ;
-	while (i < n)
-	{
-		((unsigned char *)s)[i] = 0;
-		i++;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 21:39:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 17:46:06 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 23:07:58 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,27 @@
 
 int		print_var(const char **s, t_format *f, va_list ap)
 {
+	int	ret;
+
+	ret = -1;
 	/*
 	if ('c' == **s)
-		return (get_char(f, ap));
+		ret = get_char(f, ap);
 	if ('s' == **s)
-		return (get_string(f, ap));
+		ret = get_string(f, ap);
 	*/
 	if ('d' == **s || 'i' == **s)
-		return (get_int(f, ap));
-	/*
+		ret = get_int(f, ap);
 	if ('u' == **s)
-		return (get_usint(f, ap));
-	if ('p' == **s)
-		return (get_pointer(f, ap));
+		ret = get_usint(f, ap);
+	//if ('p' == **s)
+	//	ret = get_pointer(f, ap);
 	if ('x' == **s)
-		return (get_shex(f, ap));
+		ret = get_shex(f, ap);
 	if ('X' == **s)
-		return (get_lhex(f, ap));
-	*/
-	return (-1);
+		ret = get_lhex(f, ap);
+	++(*s);
+	return (ret);
 }
 
 int		ft_printf(const char *s, ...)
@@ -61,7 +63,7 @@ int		ft_printf(const char *s, ...)
 		if ((print_num = print_var(&s, &f, ap)) == -1)
 			return (-1);
 		cnt += print_num;
-		++s;
 	}
+	va_end(ap);
 	return (cnt);
 }
