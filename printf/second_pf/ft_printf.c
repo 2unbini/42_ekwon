@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 21:39:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/10 22:16:33 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 13:00:31 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,34 +79,33 @@ void	check_width(const char **s, t_format *f, va_list ap)
 		++(*s);
 }
 
-void	check_precision(const char **s, t_format *f, va_list ap)
+void	check_precision(const char **s, t_format *f, va_list ap, int tmp)
 {
-	int		tmp;
-
-	tmp = 0;
+	if (ft_isalpha(**s) && !(f->precision))
+		f->zero_space = 0;
 	while (!ft_isalpha(**s))
 	{
 		if ('*' == **s)
 		{
 			tmp = va_arg(ap, int);
-			f->asterisk += 2;
+			//f->asterisk += 2;
 		}
 		else
 			tmp = **s - '0';
-		if (tmp <= 0)
+		if (tmp < 0)
 		{
 			++(*s);
 			continue;
 		}
-		if (tmp < 0 && f->asterisk == 1)
+		if (tmp < 0 /*&& f->asterisk == 1*/)
 		{
 			f->width = 0;
 			tmp *= -1;
 		}
 		f->precision = (f->precision * 10) + tmp;
 		++(*s);
-		if (f->asterisk == 2)
-			f->zero_space = 1;
+		//if (f->asterisk == 2)
+		//	f->zero_space = 1;
 	}
 }
 
@@ -131,7 +130,7 @@ int		ft_printf(const char *s, ...)
 		s++;
 		check_flag(&s, &f);
 		check_width(&s, &f, ap);
-		check_precision(&s, &f, ap);
+		check_precision(&s, &f, ap, 0);
 		if ((check = print_var(&s, &f, ap)) == 0)
 			return (-1);
 		cnt += check;

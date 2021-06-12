@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 13:00:13 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/11 23:35:29 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 12:59:11 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		alloc_ret(char **ret, int len, t_format *f)
 
 	if (!f->zero_space)
 		c = ' ';
-	else if (f->minus_align || f->precision || f->asterisk >= 2)
+	else if (f->minus_align || f->precision)
 		c = ' ';
 	else
 		c = '0';
@@ -53,7 +53,6 @@ int		alloc_ret(char **ret, int len, t_format *f)
 	return (1);
 }
 
-#include <stdio.h>
 int		set_istring(char **ret, int arg, t_format *f, int len)
 {
 	int		i;
@@ -71,11 +70,9 @@ int		set_istring(char **ret, int arg, t_format *f, int len)
 		return (1);
 	}
 	tmp = ft_ritoa(arg);
-	//printf("tmp after itoa: %s\n", tmp);
 	if (f->precision && f->precision > f->digit)
 		while (num++ < (f->precision - f->digit))
 			ft_strcpy(&tmp, "0", &i);
-	//printf("tmp after precision: %s\n", tmp);
 	num = 0;
 	if (f->negative)
 	{
@@ -84,12 +81,10 @@ int		set_istring(char **ret, int arg, t_format *f, int len)
 				ft_strcpy(&tmp, "0", &i);
 		tmp[i] = '-';
 	}
-	//printf("tmp after negative space: %s\n", tmp);
 	if (!(f->minus_align) && f->width > i + 1)
 		idx = f->width - (i + 1);
 	while (i >= 0)
 		(*ret)[idx++] = tmp[i--];
-	//printf("ret: %s\n", *ret);
 	tmp = 0;
 	return (1);
 }
