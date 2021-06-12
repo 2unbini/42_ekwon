@@ -14,6 +14,7 @@ int main(void)
 	char c = 'c';
 	//printf("%d\n", ft_strlen(str));
 	//ft_putstr(str);
+	/*
 	printf("%.10s\n", str);
 	printf("%.c\n", c);
 	printf("|%10.d|\n", 0);
@@ -24,5 +25,9 @@ int main(void)
 	printf("%.d\n", 0);
 	printf("%.d\n", 10);
 	printf("%3\n");
+	*/
+	printf("-->|%-4.*%|<--\n", -4);
+	printf("-->|%-4.*%|<--\n", 0);
+	printf("-->|%-4.*%|<--\n", 3);
 	return (0);
 }

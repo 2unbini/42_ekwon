@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 21:39:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 17:45:21 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/12 23:24:44 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,10 @@ void	check_precision(const char **s, t_format *f, va_list ap, int tmp)
 	}
 }
 
-void	init_flags(t_format *f)
+void	init_flags(const char *s, t_format *f)
 {
+	if ('%' == *s)
+		f->percent = 1;
 	f->zero_space = 0;
 	f->minus_align = 0;
 	f->dot = 0;

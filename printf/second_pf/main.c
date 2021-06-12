@@ -5,7 +5,7 @@
 
 int main(void)
 {
-	int d = 0;
-	unsigned int u = 4294967161;
-	ft_printf("-->|%-4.x|<--\n", u);
+	ft_printf("-->|%-4.*%|<--\n", -4);
+	ft_printf("-->|%-4.*%|<--\n", 0);
+	ft_printf("-->|%-4.*%|<--\n", 4);
 }
