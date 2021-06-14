@@ -1,48 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_utop.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:17:44 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/14 21:51:58 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/14 22:22:16 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_sign(int n)
-{
-	if (n >= 0)
-		return (1);
-	else
-		return (-1);
-}
-
-char		*ft_itoa(int n)
+char		*ft_utop(unsigned long long n, char *base, t_format *f)
 {
 	int			i;
 	int			j;
-	int			sign;
-	static char	temp[10];
+	static char	temp[20];
 
 	i = 0;
 	j = 0;
-	while (j < 10)
+	while (j < 20)
 		temp[j++] = '\0';
 	if (n == 0)
 	{
-		temp[0] = '0';
+		f->zero = 1;
+		temp[0] = (f->precision == 0) ? '\0' : '0';
+		temp[1] = 'x';
+		temp[2] = '0';
 		return (temp);
 	}
-	sign = get_sign(n);
-	n *= sign;
 	while (n)
 	{
-		temp[i] = n % 10 + '0';
-		n /= 10;
+		temp[i] = base[n % 16];
+		n /= 16;
 		i++;
 	}
+	temp[i] = 'x';
+	temp[++i] = '0';
 	return (temp);
 }

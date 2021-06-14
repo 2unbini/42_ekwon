@@ -9,11 +9,13 @@ SRCS =  ft_printf.c \
 		ft_itoa.c \
 		ft_utoa.c \
 		ft_utoh.c \
+		ft_utop.c \
 		ft_string.c \
 		get_int.c \
 		get_usint.c \
 		get_shex.c \
-		get_lhex.c
+		get_lhex.c \
+		get_pointer.c
 OBJS = $(SRCS:.c=.o)
 all : $(NAME)
 

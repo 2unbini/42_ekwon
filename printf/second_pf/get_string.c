@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_shex.c                                         :+:      :+:    :+:   */
+/*   get_string.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 13:00:13 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/14 22:07:58 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/14 21:12:47 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-static int	max_len(t_format *f, unsigned int arg)
+static int	max_len(t_format *f, char *arg)
 {
 	int result;
 
-	f->digit = 1;
 	result = 0;
-	while (arg /= 16)
-		f->digit += 1;
-	if (f->width >= f->precision && f->width >= f->digit)
+	while (arg[f->len])
+		f->len += 1;
+	if (f->width >= f->precision && f->width >= f->len)
 		result = f->width;
-	else if (f->precision >= f->width && f->precision >= f->digit)
+	else if (f->precision >= f->width && f->precision >= f->len)
 		result = f->precision;
 	else
-		result = f->digit;
+		result = f->len;
 	return (result);
 }
 
@@ -34,7 +33,7 @@ static int	alloc_ret(char **ret, int len, t_format *f)
 {
 	char	c;
 
-	if (f->zero == 1 && !f->precision && !f->width)
+	if (f->precision == 0 && f->width == 0)
 	{
 		if (!(*ret = ft_strdup("")))
 			return (-1);
@@ -75,47 +74,25 @@ static void	set_string_cont(char **ret, char **tmp, t_format *f, int *i)
 		(*ret)[idx++] = (*tmp)[*i];
 }
 
-static int	set_string(char **ret, unsigned int arg, t_format *f, int len)
+static void	set_string(char **ret, char *arg, t_format *f, int len)
 {
-	int		i;
-	int		num;
-	char	*tmp;
 
-	i = f->digit;
-	num = 0;
-	if (arg == 0 && f->precision == 0)
-	{
-		while (i < len)
-			(*ret)[i++] = ' ';
-		return (1);
-	}
-	tmp = ft_strdup(ft_utoh(arg, "0123456789abcdef"));
-	if (tmp == 0)
-		return (-1);
-	if (f->precision != -1 && f->precision > f->digit)
-		while (num++ < (f->precision - f->digit))
-			tmp[i++] = '0';
-	set_string_cont(ret, &tmp, f, &i);
-	free(tmp);
-	tmp = 0;
-	return (1);
 }
 
-int			get_shex(t_format *f, va_list ap)
+int			get_string(t_format *f, va_list ap)
 {
-	char			*ret;
-	unsigned int	arg;
-	int				len;
-	int				status;
+	char	*ret;
+	char	*arg;
+	int		len;
+	int		status;
 
-	arg = va_arg(ap, unsigned int);
+	arg = va_arg(ap, char *);
 	if (arg == 0)
 		f->zero = 1;
 	len = max_len(f, arg);
 	if (!(status = alloc_ret(&ret, len, f)))
 		return (-1);
 	if (status != 2)
-		if (set_string(&ret, arg, f, len) == -1)
-			return (-1);
+		set_string(&ret, arg, f, len);
 	return (ft_putstr(&ret));
 }

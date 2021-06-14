@@ -6,13 +6,14 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:23:11 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 23:00:19 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/14 22:40:06 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "ft_printf.h"
 # include <stdlib.h>
 # include <stdarg.h>
 
@@ -26,6 +27,7 @@ void	*my_alloc(size_t count, size_t size, char c);
 char	*ft_itoa(int n);
 char	*ft_utoa(unsigned int n);
 char	*ft_utoh(unsigned int n, char *base);
+char	*ft_utop(unsigned long long n, char *base, t_format *f);
 void	*ft_calloc(size_t count, size_t size);
 
 #endif

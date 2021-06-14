@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 13:00:13 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/12 23:11:27 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/14 22:08:13 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	set_string_cont(char **ret, char **tmp, t_format *f, int *i)
 		(*ret)[idx++] = (*tmp)[*i];
 }
 
-static void	set_string(char **ret, int arg, t_format *f, int len)
+static int	set_string(char **ret, unsigned int arg, t_format *f, int len)
 {
 	int		i;
 	int		num;
@@ -87,13 +87,18 @@ static void	set_string(char **ret, int arg, t_format *f, int len)
 	{
 		while (i < len)
 			(*ret)[i++] = ' ';
-		return ;
+		return (1);
 	}
-	tmp = ft_utoa(arg);
+	tmp = ft_strdup(ft_utoa(arg));
+	if (tmp == 0)
+		return (-1);
 	if (f->precision != -1 && f->precision > f->digit)
 		while (num++ < (f->precision - f->digit))
 			tmp[i++] = '0';
 	set_string_cont(ret, &tmp, f, &i);
+	free(tmp);
+	tmp = 0;
+	return (1);
 }
 
 int			get_usint(t_format *f, va_list ap)
@@ -110,6 +115,7 @@ int			get_usint(t_format *f, va_list ap)
 	if (!(status = alloc_ret(&ret, len, f)))
 		return (-1);
 	if (status != 2)
-		set_string(&ret, arg, f, len);
+		if (set_string(&ret, arg, f, len) == -1)
+			return (-1);
 	return (ft_putstr(&ret));
 }
