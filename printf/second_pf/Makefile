@@ -15,7 +15,10 @@ SRCS =  ft_printf.c \
 		get_usint.c \
 		get_shex.c \
 		get_lhex.c \
-		get_pointer.c
+		get_pointer.c \
+		get_string.c \
+		get_char.c \
+		get_percent.c
 OBJS = $(SRCS:.c=.o)
 all : $(NAME)
 

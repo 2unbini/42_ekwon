@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 15:26:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/14 13:46:16 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/15 16:04:41 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int		get_lhex(t_format *f, va_list ap);
 int		get_char(t_format *f, va_list ap);
 int		get_string(t_format *f, va_list ap);
 int		get_pointer(t_format *f, va_list ap);
+int		get_percent(t_format *f);
 
 #endif

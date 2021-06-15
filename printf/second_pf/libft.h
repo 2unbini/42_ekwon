@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:23:11 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/14 22:40:06 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/15 19:27:30 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		ft_putstr(char **str);
+int		ft_putstr_r(char **str, int len);
 int		ft_strlen(char *str);
 void	ft_strcpy(char **dest, char *src, int *i);
 char	*ft_strdup(char *s1);

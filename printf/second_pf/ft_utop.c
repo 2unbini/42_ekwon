@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:17:44 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/14 22:22:16 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/15 20:22:53 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,26 @@
 char		*ft_utop(unsigned long long n, char *base, t_format *f)
 {
 	int			i;
-	int			j;
 	static char	temp[20];
 
 	i = 0;
-	j = 0;
-	while (j < 20)
-		temp[j++] = '\0';
+	while (i < 20)
+		temp[i++] = '\0';
+	temp[0] = '0';
+	temp[1] = 'x';
 	if (n == 0)
 	{
 		f->zero = 1;
-		temp[0] = (f->precision == 0) ? '\0' : '0';
-		temp[1] = 'x';
-		temp[2] = '0';
+		if (f->precision != 0)
+			temp[2] = '0';
 		return (temp);
 	}
+	i = 0;
 	while (n)
 	{
-		temp[i] = base[n % 16];
+		temp[f->digit - (i + 1)] = base[n % 16];
 		n /= 16;
 		i++;
 	}
-	temp[i] = 'x';
-	temp[++i] = '0';
 	return (temp);
 }

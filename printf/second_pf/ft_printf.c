@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 21:39:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/14 22:00:56 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/15 16:15:34 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int		print_var(const char **s, t_format *f, va_list ap)
 	int	ret;
 
 	ret = -1;
-//	if ('c' == **s)
-//		ret = get_char(f, ap);
-//	if ('s' == **s)
-//		ret = get_string(f, ap);
+	if ('c' == **s)
+		ret = get_char(f, ap);
+	if ('s' == **s)
+		ret = get_string(f, ap);
 	if ('d' == **s || 'i' == **s)
 		ret = get_int(f, ap);
 	if ('u' == **s)
@@ -33,8 +33,8 @@ int		print_var(const char **s, t_format *f, va_list ap)
 		ret = get_shex(f, ap);
 	if ('X' == **s)
 		ret = get_lhex(f, ap);
-//	if (f->percent == 1)
-//		ret = get_percent(f, ap);
+	if ('%' == **s)
+		ret = get_percent(f);
 	++(*s);
 	return (ret);
 }

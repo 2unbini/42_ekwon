@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:36:14 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/14 22:53:09 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/15 19:28:03 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ int		ft_putstr(char **str)
 		++i;
 		++cnt;
 	}
+	free(*str);
+	*str = 0;
+	return (cnt);
+}
+
+int		ft_putstr_r(char **str, int len)
+{
+	int cnt;
+
+	cnt = write(1, *str, len);
 	free(*str);
 	*str = 0;
 	return (cnt);

@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:02:11 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/14 22:01:04 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/15 19:13:45 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct	s_format
 {
 	int	zero_space;
+	int	pzero_space;
 	int	minus_align;
 	int	dot;
 	int	precision;

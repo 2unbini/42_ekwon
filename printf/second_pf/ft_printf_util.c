@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 21:39:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/14 22:01:12 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/15 17:06:07 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	check_flag(const char **s, t_format *f)
 			f->zero_space = 0;
 		}
 		if ('0' == **s && 0 == f->minus_align)
+		{
 			f->zero_space = 1;
+			f->pzero_space = 1;
+		}
 		++(*s);
 	}
 }
@@ -35,7 +38,7 @@ void	check_width(const char **s, t_format *f, va_list ap)
 	int		tmp;
 
 	tmp = 0;
-	while ('.' != **s && !ft_isalpha(**s))
+	while ('.' != **s && !ft_isalpha(**s) && '%' != **s)
 	{
 		if ('*' == **s)
 			tmp = va_arg(ap, int);
@@ -59,7 +62,7 @@ void	check_width(const char **s, t_format *f, va_list ap)
 
 void	check_precision_dot(const char **s, t_format *f)
 {
-	if (ft_isalpha(**s) && f->dot)
+	if ((ft_isalpha(**s) || '%' == **s) && f->dot)
 	{
 		f->precision = 0;
 		f->zero_space = 0;
@@ -70,7 +73,7 @@ void	check_precision(const char **s, t_format *f, va_list ap, int tmp)
 {
 	check_precision_dot(s, f);
 	f->precision = 0;
-	while (!ft_isalpha(**s))
+	while (!ft_isalpha(**s) && '%' != **s)
 	{
 		if ('-' == **s)
 		{
@@ -96,6 +99,7 @@ void	check_precision(const char **s, t_format *f, va_list ap, int tmp)
 void	init_flags(t_format *f)
 {
 	f->zero_space = 0;
+	f->pzero_space = 0;
 	f->minus_align = 0;
 	f->dot = 0;
 	f->precision = -1;
