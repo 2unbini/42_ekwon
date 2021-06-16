@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:23:11 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/16 18:05:28 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/16 18:41:30 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define LIBFT_H
 
 # include "ft_printf.h"
-# include <stdlib.h>
-# include <stdarg.h>
 
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);

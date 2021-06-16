@@ -4,7 +4,6 @@ NAME = libftprintf.a
 SRCS =  ft_printf.c \
 		ft_printf_util.c \
 		ft_isfunc.c \
-		ft_memfunc.c \
 		ft_putfunc.c \
 		ft_itoa.c \
 		ft_utoa.c \

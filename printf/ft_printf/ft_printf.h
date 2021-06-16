@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:02:11 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/15 19:13:45 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/16 18:31:44 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct	s_format
 int				ft_printf(const char *s, ...);
 void			check_flag(const char **s, t_format *f);
 void			check_width(const char **s, t_format *f, va_list ap);
-void			chekc_precision_dot(const char **s, t_format *f);
+void			check_precision_dot(const char **s, t_format *f);
 void			check_precision(const char **s, t_format *f, va_list ap,
 								int tmp);
 void			init_flags(t_format *f);

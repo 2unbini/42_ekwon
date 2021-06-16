@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 21:39:10 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/16 16:09:02 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/16 18:32:49 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "getfunc.h"
 #include "libft.h"
 
-int		print_var(const char **s, t_format *f, va_list ap)
+int			print_var(const char **s, t_format *f, va_list ap)
 {
 	int	ret;
 
@@ -51,7 +51,7 @@ static void	flag_funcs(const char **s, t_format *f, va_list ap)
 	}
 }
 
-int		ft_printf(const char *s, ...)
+int			ft_printf(const char *s, ...)
 {
 	va_list		ap;
 	t_format	f;

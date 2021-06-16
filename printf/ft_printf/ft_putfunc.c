@@ -6,13 +6,11 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:36:14 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/16 18:03:48 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/16 18:38:19 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 int		ft_strlen(char *str)
 {
