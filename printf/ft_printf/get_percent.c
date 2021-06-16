@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 13:00:13 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/15 22:37:42 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/16 18:12:50 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,23 @@ static int	max_len(t_format *f)
 
 static int	alloc_ret(char **ret, int len, t_format *f)
 {
-	char c;
+	int		i;
+	char	c;
 
+	i = 0;
 	c = ' ';
 	if (f->pzero_space == 1 && f->minus_align == 0)
 		c = '0';
-	*ret = my_alloc(len, sizeof(char), c);
-	if (!(*ret))
+	if (f->width == 0 && len == 0)
+	{
+		*ret = 0;
+		return (0);
+	}
+	if (!(*ret = (char *)malloc(sizeof(char) * (len + 1))))
 		return (-1);
+	while (i < len)
+		(*ret)[i++] = c;
+	(*ret)[i] = 0;
 	return (len);
 }
 

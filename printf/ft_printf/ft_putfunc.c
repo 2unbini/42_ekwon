@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:36:14 by ekwon             #+#    #+#             */
-/*   Updated: 2021/06/16 16:10:36 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/06/16 18:03:48 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,45 +24,12 @@ int		ft_strlen(char *str)
 	return (len);
 }
 
-int		ft_putstr2(char **str, int len)
+int		ft_putstring(char **str, int len)
 {
-	int	i;
 	int	cnt;
 
-	i = 0;
 	if (*str == 0)
 		return (0);
-	cnt = write(1, *str, len);
-	free(*str);
-	*str = 0;
-	return (cnt);
-}
-
-int		ft_putstr(char **str)
-{
-	int	i;
-	int cnt;
-	int	len;
-
-	i = 0;
-	cnt = 0;
-	len = ft_strlen(*str);
-	while (i < len)
-	{
-		write(1, &((*str)[i]), 1);
-		(*str)[i] = '\0';
-		++i;
-		++cnt;
-	}
-	free(*str);
-	*str = 0;
-	return (cnt);
-}
-
-int		ft_putstr_r(char **str, int len)
-{
-	int cnt;
-
 	cnt = write(1, *str, len);
 	free(*str);
 	*str = 0;
