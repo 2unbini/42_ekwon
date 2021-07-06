@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 21:17:27 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/11 14:42:16 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/07/06 13:53:51 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*ft_strdup(const char *s1)
 	char	*ptr;
 
 	i = 0;
-	if (!(ptr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
+	ptr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!ptr)
 		return (NULL);
 	while (s1[i])
 	{

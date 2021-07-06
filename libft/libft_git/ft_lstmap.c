@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 16:48:54 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/10 21:39:10 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/07/06 14:03:56 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	if (!lst || !f)
 		return (NULL);
-	if (!(cp_lst = ft_lstnew(f(lst->content))))
+	cp_lst = ft_lstnew(f(lst->content));
+	if (!cp_lst)
 		return (NULL);
 	start = cp_lst;
 	while (lst->next)

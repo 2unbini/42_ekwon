@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 20:23:23 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/07 21:50:55 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/07/06 14:05:16 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t	i;
 
 	i = 0;
-	if (!(ptr = (void*)malloc(size * count)))
+	ptr = (void *)malloc(size * count);
+	if (!ptr)
 		return (NULL);
 	while (i < size * count)
 	{

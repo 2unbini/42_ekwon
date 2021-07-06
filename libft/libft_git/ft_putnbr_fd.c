@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 16:26:45 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/09 23:12:46 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/07/06 13:59:56 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	make_put_string(int n, int fd, int sign)
 	}
 }
 
-void		ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	int		i;
 	int		sign;

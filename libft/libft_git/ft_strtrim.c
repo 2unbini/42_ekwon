@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:23:08 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/11 19:47:43 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/07/06 13:50:23 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 		rear--;
 	if (front > rear)
 		return (ft_strdup(""));
-	if (!(result = (char *)malloc(sizeof(char) * (rear - front + 1))))
+	result = (char *)malloc(sizeof(char) * (rear - front + 1));
+	if (!result)
 		return (NULL);
 	ft_strlcpy(result, (s1 + front), (rear - front + 1));
 	return (result);

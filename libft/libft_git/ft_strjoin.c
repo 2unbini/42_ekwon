@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:13:40 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/11 19:39:06 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/07/06 13:53:27 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	if (!(result = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1))))
+	result = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!result)
 		return (NULL);
 	while (i < s1_len)
 	{

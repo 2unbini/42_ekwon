@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:17:44 by ekwon             #+#    #+#             */
-/*   Updated: 2021/05/09 22:29:57 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/07/06 14:04:55 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static char	*make_string(char tmp[], int sign, int i)
 	char	*result;
 
 	idx = -1;
-	if (!(result = (char *)malloc(sizeof(char) * (i + 1))))
+	result = (char *)malloc(sizeof(char) * (i + 1));
+	if (!result)
 		return (NULL);
 	if (sign == -1)
 		result[++idx] = '-';
@@ -59,7 +60,7 @@ static char	*make_string(char tmp[], int sign, int i)
 	return (result);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int		i;
 	int		sign;
