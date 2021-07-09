@@ -3,12 +3,11 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
-	char *argv[] = {"ls -l", NULL};
 	int pid;
 	int counter = 1;
-	int fd = open("./file2.txt", O_WRONLY | O_CREAT);
+	int fd = open("./file4.txt", O_WRONLY | O_CREAT);
 	int pipe_fd[2];
 	char buf;
 
@@ -25,11 +24,19 @@ int main(void)
 		printf("execve start\n");
 		dup2(pipe_fd[1], 1);
 		close(pipe_fd[0]);
-		execve("/bin/ls", &argv[0], &argv[1]);
-		printf("error\n");
+		int a = execve("hello", &argv[1], envp);
+		if (a == -1)
+		{
+			write(2, "this is a\n", 10);
+			a = execve("/bin/ls", &argv[1], envp);
+			printf("hello ?? : %d\n", a);
+		}
+		write(2, "why exe?\n", 9);
+		write(1, "33error\n", 8);
 	}
 	else
 	{
+		wait(&pid);
 		printf("parent\n");
 		dup2(pipe_fd[0], 0);
 		close(pipe_fd[1]);
