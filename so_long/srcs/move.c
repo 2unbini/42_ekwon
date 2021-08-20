@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:02:31 by ekwon             #+#    #+#             */
-/*   Updated: 2021/08/20 22:59:20 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/08/20 23:51:50 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,27 @@ static void	move_key(int keycode, t_game *game)
 
 static void	put_player_image(t_game *game)
 {
-	mlx_put_image_to_window_scale(game->mlx_ptr, game->win_ptr,
+	mlx_put_image_to_window_scale(game->mlx_ptr, game->win.win_ptr,
 		game->img.img_ptr, 64, 0, 64, 64, game->pos.x * TILE_SIZE,
 		game->pos.y * TILE_SIZE, TILE_SIZE, TILE_SIZE, 0xFFFFFFFF);
-	mlx_put_image_to_window_scale(game->mlx_ptr, game->win_ptr,
-	game->play.img_ptr, 0, 0, 64, 64, game->pos.x * TILE_SIZE,
+	if (game->map.map[game->pos.y][game->pos.x] == 'E')
+		mlx_put_image_to_window_scale(game->mlx_ptr, game->win.win_ptr,
+			game->img.img_ptr, 128, 0, 64, 64, game->pos.x * TILE_SIZE,
+			game->pos.y * TILE_SIZE, TILE_SIZE, TILE_SIZE, 0xFFFFFFFF);
+	mlx_put_image_to_window_scale(game->mlx_ptr, game->win.win_ptr,
+		game->play.img_ptr, 0, 0, 64, 64, game->pos.x * TILE_SIZE,
 		game->pos.y * TILE_SIZE, TILE_SIZE, TILE_SIZE, 0xFFFFFFFF);
 }
 
 static void	remove_afterimage(t_game *game)
 {
-	mlx_put_image_to_window_scale(game->mlx_ptr, game->win_ptr,
+	mlx_put_image_to_window_scale(game->mlx_ptr, game->win.win_ptr,
 		game->img.img_ptr, 64, 0, 64, 64, game->pos.p_x * TILE_SIZE,
 		game->pos.p_y * TILE_SIZE, TILE_SIZE, TILE_SIZE, 0xFFFFFFFF);
+	if (game->map.map[game->pos.p_y][game->pos.p_x] == 'E')
+		mlx_put_image_to_window_scale(game->mlx_ptr, game->win.win_ptr,
+			game->img.img_ptr, 128, 0, 64, 64, game->pos.p_x * TILE_SIZE,
+			game->pos.p_y * TILE_SIZE, TILE_SIZE, TILE_SIZE, 0xFFFFFFFF);
 }
 
 int	key_press(int keycode, t_game *game)

@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 16:58:50 by ekwon             #+#    #+#             */
-/*   Updated: 2021/08/20 20:24:39 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/08/20 23:34:06 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	init_function(t_game *game)
 
 static void	hook_function(t_game *game)
 {
-	mlx_hook(game->win_ptr, X_EVENT_PRESS, 0, &key_press, game);
-	mlx_hook(game->win_ptr, X_EVENT_EXIT, 0, &exit_game, game);
+	mlx_hook(game->win.win_ptr, X_EVENT_PRESS, 0, &key_press, game);
+	mlx_hook(game->win.win_ptr, X_EVENT_EXIT, 0, &exit_game, game);
 }
 
 int	main(int argc, char **argv)

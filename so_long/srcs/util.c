@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:04:47 by ekwon             #+#    #+#             */
-/*   Updated: 2021/08/20 23:10:08 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/08/20 23:17:46 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	exit_game(t_game *game)
 {
 	mlx_destroy_image(game->mlx_ptr, game->img.img_ptr);
 	mlx_destroy_image(game->mlx_ptr, game->play.img_ptr);
-	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	mlx_destroy_window(game->mlx_ptr, game->win.win_ptr);
 	exit(0);
 }
 

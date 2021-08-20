@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 16:55:51 by ekwon             #+#    #+#             */
-/*   Updated: 2021/08/20 23:10:18 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/08/20 23:17:25 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,21 @@ typedef struct s_map
 	char	**map;
 }				t_map;
 
+typedef struct s_win
+{
+	void	*win_ptr;
+	int		win_width;
+	int		win_height;
+}				t_win;
+
 typedef struct s_game
 {
 	void	*mlx_ptr;
-	void	*win_ptr;
+	t_win	win;
 	t_img	img;
 	t_img	play;
 	t_pos	pos;
 	t_map	map;
-	int		win_width;
-	int		win_height;
 	int		assets[5];
 	int		step_cnt;
 	bool	player_fetched;
