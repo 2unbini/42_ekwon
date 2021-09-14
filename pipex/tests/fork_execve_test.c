@@ -3,11 +3,13 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+char *ft_strjoin(char *s1, char *s2);
+
 int main(int argc, char **argv, char **envp)
 {
 	int pid;
 	int counter = 1;
-	int fd = open("./file4.txt", O_WRONLY | O_CREAT);
+	int fd = open("./file.txt", O_WRONLY | O_CREAT);
 	int pipe_fd[2];
 	char buf;
 
@@ -21,18 +23,24 @@ int main(int argc, char **argv, char **envp)
 	else if (pid == 0)
 	{
 		printf("child\n");
-		printf("execve start\n");
+		printf("fork start\n");
 		dup2(pipe_fd[1], 1);
 		close(pipe_fd[0]);
-		int a = execve("hello", &argv[1], envp);
-		if (a == -1)
+
+		char path = ft_strjoin("/usr/bin/", argv[1]);
+		char** command;
+		command = (char**)malloc(sizeof(char*) * 2);
+		command[0] = argv[1];
+		command[1] = '\0';
+		int execve_status = execve(path, command, envp);
+		if (execve_status == -1)
 		{
-			write(2, "this is a\n", 10);
-			a = execve("/bin/ls", &argv[1], envp);
-			printf("hello ?? : %d\n", a);
+			write(2, "cannot execute\n", 12);
+			exit(0);
 		}
-		write(2, "why exe?\n", 9);
-		write(1, "33error\n", 8);
+		free(path);
+		free(command);
+		write(1, "write child\n", 12);
 	}
 	else
 	{
@@ -46,4 +54,37 @@ int main(int argc, char **argv, char **envp)
 		printf("process complete\n");
 	}
 	return (0);
+}
+
+int	ft_strlen(char *s)
+{
+	int len;
+
+	len = 0;
+	if (s == NULL)
+		return (0);
+	while (s[len] != '\0')
+		len++;
+	return (len);
+}
+
+char *ft_strjoin(char *s1, char *s2)
+{
+	int i;
+	char *ret;
+	int s1_len;
+	int s2_len;
+
+	i = 0;
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	ret = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!ret)
+		return (NULL);
+	while (*s1 != '\0')
+		ret[i++] = *s1++;
+	while (*s2 != '\0')
+		ret[i++] = *s2++;
+	ret[i] = '\0';
+	return (ret);
 }
