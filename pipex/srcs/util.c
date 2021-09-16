@@ -6,48 +6,38 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 12:37:51 by ekwon             #+#    #+#             */
-/*   Updated: 2021/09/15 18:50:08 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/09/16 16:41:22 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	print_error(char *message)
-{
-	write(1, message, ft_strlen(message));
-	write(1, "\n", 1);
-}
-
 void	init_data(t_data *data, char **argv, char **envp)
 {
 	data->envp = envp;
+	pipe(data->pipe_fd);
 	data->c.file_in = argv[1];
 	data->p.file_out = argv[4];
 	if (parse_path(data) == -1)
 	{
-		print_error("Error: Cannot Find Any Path");
-		exit(-1);
+		perror("Error: Cannot Find Any Path");
+		exit(1);
 	}
 	data->c.cmd_one = ft_split(argv[2], ' ');
 	data->p.cmd_two = ft_split(argv[3], ' ');
 	if (data->c.cmd_one == NULL || data->p.cmd_two == NULL)
 	{
-		print_error("Error: Malloc Error");
-		exit(-1);
+		perror("Error: Malloc Error");
+		exit(1);
 	}
 	data->c.exe_path = check_access(*data, data->c.cmd_one[0]);
 	data->p.exe_path = check_access(*data, data->p.cmd_two[0]);
-	if (data->c.exe_path == NULL || data->p.exe_path == NULL)
-	{
-		print_error("Error: Cannot Access");
-		exit(-1);
-	}
 }
 
 int	find_line(char *target, char **envp)
 {
-	int	index;
-	int	compare;
+	int		index;
+	int		compare;
 	size_t	n;
 
 	index = 0;
@@ -64,8 +54,8 @@ int	find_line(char *target, char **envp)
 
 int	parse_path(t_data *data)
 {
-	int 	index;
-	
+	int	index;
+
 	index = find_line("PATH=", data->envp);
 	data->path = ft_split_slash(&data->envp[index][5], ':');
 	index = find_line("PWD=", data->envp);
