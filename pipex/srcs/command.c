@@ -6,9 +6,10 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 16:34:34 by ekwon             #+#    #+#             */
-/*   Updated: 2021/09/19 15:07:11 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/09/19 17:48:29 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "pipex.h"
 
 static int	word_len(char const *s, char c, int idx)
