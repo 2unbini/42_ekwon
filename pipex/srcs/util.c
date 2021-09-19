@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 12:37:51 by ekwon             #+#    #+#             */
-/*   Updated: 2021/09/16 16:41:22 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/09/16 20:26:39 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	init_data(t_data *data, char **argv, char **envp)
 		perror("Error: Cannot Find Any Path");
 		exit(1);
 	}
-	data->c.cmd_one = ft_split(argv[2], ' ');
-	data->p.cmd_two = ft_split(argv[3], ' ');
+	data->c.cmd_one = parse_command(argv[2], ' ');
+	data->p.cmd_two = parse_command(argv[3], ' ');
 	if (data->c.cmd_one == NULL || data->p.cmd_two == NULL)
 	{
 		perror("Error: Malloc Error");
@@ -57,7 +57,7 @@ int	parse_path(t_data *data)
 	int	index;
 
 	index = find_line("PATH=", data->envp);
-	data->path = ft_split_slash(&data->envp[index][5], ':');
+	data->path = add_slash(&data->envp[index][5], ':');
 	index = find_line("PWD=", data->envp);
 	data->pwd = ft_strdup(&data->envp[index][4]);
 	if (data->path == NULL && data->pwd == NULL)

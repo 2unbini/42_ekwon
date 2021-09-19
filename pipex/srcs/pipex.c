@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:17:55 by ekwon             #+#    #+#             */
-/*   Updated: 2021/09/16 16:41:23 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/09/16 21:31:16 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	main(int argc, char **argv, char **envp)
 		exit(1);
 	}
 	init_data(&data, argv, envp);
+	
+	printf("%s, %s\n", data.p.cmd_two[0], data.p.cmd_two[1]);
+
 	pid = fork();
 	if (pid < 0)
 	{
@@ -42,7 +45,7 @@ int	main(int argc, char **argv, char **envp)
 
 void	run_child_process(t_data data, int pipe_fd[])
 {
-	int		fd_in;
+	int	fd_in;
 
 	fd_in = open(data.c.file_in, O_RDONLY);
 	if (fd_in < 0)
