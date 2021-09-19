@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 16:34:34 by ekwon             #+#    #+#             */
-/*   Updated: 2021/09/16 22:00:04 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/09/19 15:07:11 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -37,26 +37,6 @@ static int	word_len(char const *s, char c, int idx)
 	return (len);
 }
 
-/*
-static void	specific_case(char const *s, int *idx, int *status)
-{
-	if (s[*idx] == '\'' || s[*idx] == '"' || s[*idx] == '\\')
-	{
-		if (*status == 0 && s[*idx] == '\'')
-			*status = 1;
-		else if (*status == 0 && s[*idx] == '"')
-			*status = 2;
-		else if (*status == 1 && s[*idx] == '"')
-			(*idx)++;
-		else if (*status == 2 && s[*idx] == '\'')
-			(*idx)++;
-		(*idx)++;
-	}
-	//write(1, "deleted\n", 8);
-	//write(1, &s[*idx], 1);
-}
-*/
-
 static void	word_ptr(char *ptr, char const *s, char c, int *idx)
 {
 	int	status;
@@ -74,24 +54,10 @@ static void	word_ptr(char *ptr, char const *s, char c, int *idx)
 	{
 		while (s[*idx])
 		{
-			// s case
-			specific_case(s, idx, &status);
 			*ptr = ((char *)s)[(*idx)++];
 			ptr++;
 		}
 	}
-	/*
-	if (status == 1)
-	{
-		*ptr = '\'';
-		ptr++;
-	}
-	if (status == 2)
-	{
-		*ptr = '"';
-		ptr++;
-	}
-	*/
 	*ptr = 0;
 }
 

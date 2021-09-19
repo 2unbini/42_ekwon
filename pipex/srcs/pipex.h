@@ -6,12 +6,14 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 12:33:58 by ekwon             #+#    #+#             */
-/*   Updated: 2021/09/16 20:18:23 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/09/19 15:31:28 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+# define PROGRAM_NAME bash
 
 # include <stdlib.h>
 # include <fcntl.h>
