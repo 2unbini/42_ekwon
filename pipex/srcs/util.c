@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 12:37:51 by ekwon             #+#    #+#             */
-/*   Updated: 2021/09/19 15:15:04 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/09/19 17:40:27 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ void	init_data(t_data *data, char **argv, char **envp)
 	}
 	data->c.cmd_one = parse_command(argv[2], ' ');
 	data->p.cmd_two = parse_command(argv[3], ' ');
-
-    //printf("cmdone: %s, %s\n", data->c.cmd_one[0], data->c.cmd_one[1]);
-    //printf("cmdtwo: %s, %s\n", data->p.cmd_two[0], data->p.cmd_two[1]);
-
 	if (data->c.cmd_one == NULL || data->p.cmd_two == NULL)
 	{
 		perror("Error: Malloc Error");
