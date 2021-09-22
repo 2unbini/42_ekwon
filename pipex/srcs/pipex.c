@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:17:55 by ekwon             #+#    #+#             */
-/*   Updated: 2021/09/19 17:44:07 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/09/20 18:39:59 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,9 @@ void	run_parent_process(t_data data, int pipe_fd[])
 {
 	int	fd_out;
 
-	fd_out = open(data.p.file_out, O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU);
-	if (fd_out < 0)
+	fd_out = open(data.p.file_out, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	//fd_out = open(data.p.file_out, O_WRONLY);
+    if (fd_out < 0)
 	{
 		perror("Error: Cannot open file");
 		exit(1);
