@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 12:33:58 by ekwon             #+#    #+#             */
-/*   Updated: 2021/09/19 17:40:55 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/10/06 13:57:53 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ char	**add_slash(char const *s, char c);
 void	run_child_process(t_data data, int pipe_fd[]);
 void	run_parent_process(t_data data, int pipe_fd[]);
 char	**parse_command(char const *s, char c);
+void	pass_prefix(char const *s, int *idx);
+void	pass_suffix(char const *s, int *idx);
 
 #endif

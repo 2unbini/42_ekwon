@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.c                                          :+:      :+:    :+:   */
+/*   command_two.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 16:34:34 by ekwon             #+#    #+#             */
-/*   Updated: 2021/09/19 17:48:29 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/10/06 13:57:37 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ static int	word_len(char const *s, char c, int idx)
 	}
 	else
 	{
+		pass_prefix(s, &idx);
 		while (s[idx])
 		{
 			idx++;
 			len++;
+			pass_suffix(s, &idx);
 		}
 	}
 	return (len);
@@ -53,10 +55,12 @@ static void	word_ptr(char *ptr, char const *s, char c, int *idx)
 	}
 	else
 	{
+		pass_prefix(s, idx);
 		while (s[*idx])
 		{
 			*ptr = ((char *)s)[(*idx)++];
 			ptr++;
+			pass_suffix(s, idx);
 		}
 	}
 	*ptr = 0;

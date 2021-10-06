@@ -6,7 +6,7 @@
 #    By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/15 17:56:13 by ekwon             #+#    #+#              #
-#    Updated: 2021/09/20 18:05:40 by ekwon            ###   ########.fr        #
+#    Updated: 2021/10/06 13:57:59 by ekwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 NAME = pipex
 
-SRCS_NAME = pipex.c util.c path.c command.c
+SRCS_NAME = pipex.c util.c path.c command.c fix.c
 SRCS_DIR = ./srcs
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 OBJS = $(SRCS:.c=.o)
