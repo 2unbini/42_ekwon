@@ -6,7 +6,7 @@
 /*   By: ekwon <ekwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 12:33:58 by ekwon             #+#    #+#             */
-/*   Updated: 2021/10/06 13:57:53 by ekwon            ###   ########.fr       */
+/*   Updated: 2021/10/06 14:04:51 by ekwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <string.h>
 # include <errno.h>
 # include <stdio.h>
 
